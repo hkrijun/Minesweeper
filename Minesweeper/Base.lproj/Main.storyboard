@@ -1,26 +1,224 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RRE-rl-LKi">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+        <array key="HelveticaNeueExtras.ttc">
+            <string>HelveticaNeue-CondensedBlack</string>
+            <string>HelveticaNeue-CondensedBold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Game View Controller-->
+        <scene sceneID="P53-w5-98t">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="RRE-rl-LKi" userLabel="Game View Controller" customClass="GameViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="L4Q-5J-1dU"/>
+                        <viewControllerLayoutGuide type="bottom" id="d2N-UM-GYb"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="EQF-Gl-4Rg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="aHE-Q1-Jsp">
+                                <rect key="frame" x="0.0" y="40" width="375" height="627"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1X-Lu-plE" customClass="TriangleView" customModule="Minesweeper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="40" width="126" height="126"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="P1X-Lu-plE" secondAttribute="height" multiplier="1:1" id="AIz-fc-zLt"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="triangleColor">
+                                        <color key="value" red="0.097500000000000003" green="0.12987499999999999" blue="0.14999999999999999" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="clip" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rjr-D4-Kuk">
+                                <rect key="frame" x="5" y="0.0" width="106" height="54.5"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="MENU">
+                                            <attributes>
+                                                <color key="NSColor" red="0.099759377539157867" green="0.12877613306045532" blue="0.15053310990333557" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="44" name="HelveticaNeue-CondensedBlack"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="clipping" baseWritingDirection="natural" lineHeightMultiple="0.80000000000000004" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="tXs-YZ-tme" kind="presentation" identifier="gameToMenu" customClass="SegueFromRight" customModule="Minesweeper" customModuleProvider="target" id="DNp-II-DYA"/>
+                                </connections>
+                            </button>
+                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvj-U2-693">
+                                <rect key="frame" x="10" y="13" width="67" height="48"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" red="0.34559999999999996" green="0.47999999999999998" blue="0.43296000000000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="43%" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxN-tc-10b">
+                                <rect key="frame" x="79" y="37.5" width="26.5" height="18"/>
+                                <color key="backgroundColor" red="0.10381401909722222" green="0.10381401909722222" blue="0.10381401909722222" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="0.51000000000000001" green="0.49810000000000004" blue="0.36719999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ykr-Wv-oZg">
+                                <rect key="frame" x="20" y="52" width="71" height="25"/>
+                                <color key="backgroundColor" red="0.12052408854166667" green="0.12052408854166667" blue="0.12052408854166667" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="21"/>
+                                <color key="textColor" red="0.64000000000000001" green="0.15381333333333339" blue="0.089600000000000013" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.13799999999999998" green="0.17623333333333335" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="wvj-U2-693" firstAttribute="baseline" secondItem="Rjr-D4-Kuk" secondAttribute="baseline" constant="14" id="1kr-Lw-Cn2"/>
+                            <constraint firstItem="UxN-tc-10b" firstAttribute="baseline" secondItem="wvj-U2-693" secondAttribute="baseline" id="27k-yJ-grd"/>
+                            <constraint firstItem="P1X-Lu-plE" firstAttribute="width" secondItem="Rjr-D4-Kuk" secondAttribute="width" constant="20" id="6Es-fL-jRw"/>
+                            <constraint firstItem="P1X-Lu-plE" firstAttribute="leading" secondItem="EQF-Gl-4Rg" secondAttribute="leading" id="8eX-QB-gPG"/>
+                            <constraint firstItem="P1X-Lu-plE" firstAttribute="top" secondItem="L4Q-5J-1dU" secondAttribute="bottom" id="D8X-9f-blp"/>
+                            <constraint firstItem="Rjr-D4-Kuk" firstAttribute="leading" secondItem="EQF-Gl-4Rg" secondAttribute="leading" constant="5" id="DwQ-GK-EAd"/>
+                            <constraint firstItem="aHE-Q1-Jsp" firstAttribute="leading" secondItem="EQF-Gl-4Rg" secondAttribute="leading" id="Mcp-sU-830"/>
+                            <constraint firstItem="Ykr-Wv-oZg" firstAttribute="leading" secondItem="EQF-Gl-4Rg" secondAttribute="leading" constant="20" id="QRX-3c-9nR"/>
+                            <constraint firstItem="Rjr-D4-Kuk" firstAttribute="top" secondItem="EQF-Gl-4Rg" secondAttribute="top" id="R7i-te-VEl"/>
+                            <constraint firstAttribute="bottom" secondItem="aHE-Q1-Jsp" secondAttribute="bottom" id="VFR-Bv-9Hg"/>
+                            <constraint firstAttribute="trailing" secondItem="aHE-Q1-Jsp" secondAttribute="trailing" id="Z5u-9S-LkE"/>
+                            <constraint firstItem="wvj-U2-693" firstAttribute="leading" secondItem="EQF-Gl-4Rg" secondAttribute="leading" constant="10" id="dwO-vb-klL"/>
+                            <constraint firstItem="aHE-Q1-Jsp" firstAttribute="top" secondItem="L4Q-5J-1dU" secondAttribute="bottom" id="kDt-u1-4WL"/>
+                            <constraint firstItem="UxN-tc-10b" firstAttribute="leading" secondItem="wvj-U2-693" secondAttribute="trailing" constant="2" id="xJC-9c-ii2"/>
+                            <constraint firstItem="Ykr-Wv-oZg" firstAttribute="top" secondItem="wvj-U2-693" secondAttribute="baseline" id="z1u-es-fS0"/>
+                        </constraints>
                     </view>
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="plotsLabel" destination="wvj-U2-693" id="TWM-11-wIQ"/>
+                        <outlet property="plotsSubLabel" destination="UxN-tc-10b" id="WBO-DN-L68"/>
+                        <outlet property="scrollView" destination="aHE-Q1-Jsp" id="XWt-6A-3Ld"/>
+                        <outlet property="timeLabel" destination="Ykr-Wv-oZg" id="dSq-54-NVH"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c8t-je-XhV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="892" y="17.541229385307346"/>
+        </scene>
+        <!--Main Menu View Controller-->
+        <scene sceneID="EzW-nW-TGh">
+            <objects>
+                <viewController storyboardIdentifier="MainMenu" id="tXs-YZ-tme" customClass="MainMenuViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ema-VD-R65"/>
+                        <viewControllerLayoutGuide type="bottom" id="QaJ-o9-io3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SzY-5O-naL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hti-B6-UV8" customClass="TriangleView" customModule="Minesweeper" customModuleProvider="target">
+                                <rect key="frame" x="244" y="529.5" width="131" height="131"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Hti-B6-UV8" secondAttribute="height" multiplier="1:1" id="91M-dz-Rv2"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="positionTop" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="positionLeft" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="triangleColor">
+                                        <color key="value" red="0.081599999999999992" green="0.10719999999999999" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRF-Qo-fQZ" userLabel="BottomBar">
+                                <rect key="frame" x="0.0" y="660" width="375" height="6.5"/>
+                                <color key="backgroundColor" red="0.081600000000000006" green="0.1072" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKs-vB-6G5" userLabel="LeftBar">
+                                <rect key="frame" x="0.0" y="0.0" width="13" height="660.5"/>
+                                <color key="backgroundColor" red="0.081600000000000006" green="0.1072" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3yG-XY-dud">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0np-Na-aXm" customClass="MenuImage" customModule="Minesweeper" customModuleProvider="target">
+                                <rect key="frame" x="40" y="40" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.62" green="0.043399999999999966" blue="0.13950000000000012" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="Fjt-4Q-H2g"/>
+                                    <constraint firstAttribute="width" secondItem="0np-Na-aXm" secondAttribute="height" multiplier="1:1" id="cTe-lj-RZM"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MINESWEEPER" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmD-6G-33G" customClass="PaddedLabel" customModule="Minesweeper" customModuleProvider="target">
+                                <rect key="frame" x="40" y="90" width="50.000000000000014" height="312"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.055999999999999966" blue="0.18000000000000016" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="50"/>
+                                <color key="textColor" red="0.84999999999999998" green="0.79730000000000001" blue="0.58649999999999991" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                        <real key="value" value="-5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                        <real key="value" value="-5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.10349999999999999" green="0.13294999999999998" blue="0.14999999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="0np-Na-aXm" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" constant="40" id="2Ys-zA-cGa"/>
+                            <constraint firstItem="3yG-XY-dud" firstAttribute="top" secondItem="SzY-5O-naL" secondAttribute="top" id="7Yr-Nd-To2"/>
+                            <constraint firstAttribute="bottom" secondItem="dRF-Qo-fQZ" secondAttribute="bottom" id="87i-KL-7dE"/>
+                            <constraint firstItem="dRF-Qo-fQZ" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" id="DDB-aW-3XJ"/>
+                            <constraint firstAttribute="trailing" secondItem="dRF-Qo-fQZ" secondAttribute="trailing" id="L7D-wY-Dro"/>
+                            <constraint firstItem="dRF-Qo-fQZ" firstAttribute="height" secondItem="nKs-vB-6G5" secondAttribute="width" multiplier="0.5" id="LE1-zU-p2l"/>
+                            <constraint firstAttribute="trailing" secondItem="Hti-B6-UV8" secondAttribute="trailing" id="SAP-c0-WXM"/>
+                            <constraint firstAttribute="bottom" secondItem="3yG-XY-dud" secondAttribute="bottom" id="UKA-KO-uRN"/>
+                            <constraint firstItem="dRF-Qo-fQZ" firstAttribute="top" secondItem="Hti-B6-UV8" secondAttribute="bottom" id="YNk-ch-LK4"/>
+                            <constraint firstItem="vmD-6G-33G" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" constant="40" id="aOX-9z-vSC"/>
+                            <constraint firstItem="nKs-vB-6G5" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" id="bi4-pD-XLo"/>
+                            <constraint firstItem="vmD-6G-33G" firstAttribute="height" secondItem="0np-Na-aXm" secondAttribute="height" id="cH8-G1-uFB"/>
+                            <constraint firstItem="0np-Na-aXm" firstAttribute="width" secondItem="SzY-5O-naL" secondAttribute="width" multiplier="0.125" priority="750" id="dSZ-Lr-93q"/>
+                            <constraint firstItem="vmD-6G-33G" firstAttribute="top" secondItem="0np-Na-aXm" secondAttribute="bottom" id="dzq-7J-cJT"/>
+                            <constraint firstItem="3yG-XY-dud" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" id="fEI-Ta-9V4"/>
+                            <constraint firstAttribute="trailing" secondItem="3yG-XY-dud" secondAttribute="trailing" id="isV-AZ-uTO"/>
+                            <constraint firstItem="0np-Na-aXm" firstAttribute="top" secondItem="SzY-5O-naL" secondAttribute="top" constant="40" id="m4X-9v-EEp"/>
+                            <constraint firstItem="nKs-vB-6G5" firstAttribute="top" secondItem="SzY-5O-naL" secondAttribute="top" id="o07-ly-Okl"/>
+                            <constraint firstItem="0np-Na-aXm" firstAttribute="leading" secondItem="nKs-vB-6G5" secondAttribute="trailing" constant="27" id="vQO-Qq-VSl"/>
+                            <constraint firstItem="dRF-Qo-fQZ" firstAttribute="top" secondItem="nKs-vB-6G5" secondAttribute="bottom" id="xu1-7R-LOc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundHighlight" destination="3yG-XY-dud" id="f8d-Ui-67G"/>
+                        <outlet property="menuImage" destination="0np-Na-aXm" id="PT6-ZZ-KBN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BD8-3R-un7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1584.8" y="16.641679160419791"/>
         </scene>
     </scenes>
 </document>
