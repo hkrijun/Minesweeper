@@ -18,7 +18,7 @@ class MainMenuViewController: UIViewController {
 	private var m_menus : [Menu] = [Menu]()
 	
 	enum MenuID : Int {
-		case main = 0, newGame, topListChoice, normalTopList, largeTopList, exitGame
+		case main = 0, newGame, topListChoice, normalTopList, largeTopList //, exitGame
 		
 		static let count : Int = 6
 	}
@@ -75,11 +75,11 @@ class MainMenuViewController: UIViewController {
 		
 		// -- Main Menu
 		
-		m_menus.insert(Menu("menu", backButton: "Exit", backButtonType: .exit, view: view), at: MenuID.main.rawValue)
+		m_menus.insert(Menu("menu", backButton: nil, backButtonType: .exit, view: view), at: MenuID.main.rawValue)
 		MenuBy(id: .main).Add(options: [ (title: "New Game", action: #selector(OpenNewGameMenu)),
 		                                 (title: "Top List", action: #selector(OpenTopListMenu)),
 		                                 (title: "Continue", action: #selector(ContinueClicked)) ],
-		                      backButtonAction: #selector(ExitClicked), target: self)
+		                      backButtonAction: nil, target: self)
 		
 		// -- New Game Menu
 		
@@ -112,11 +112,11 @@ class MainMenuViewController: UIViewController {
 		Define(menu: .largeTopList, parent: .topListChoice)
 		
 		// -- Exit Menu
-		
+		/*
 		m_menus.insert(Menu("exit game", backButton: "Back", backButtonType: .back, view: view), at: MenuID.exitGame.rawValue)
 		MenuBy(id: .exitGame).Add(options: [ (title: "Exit", action: #selector(ExitConfirmClicked)) ],
 		                         backButtonAction: #selector(BackFromExitGameClicked), target: self)
-		Define(menu: .exitGame, parent: .main)
+		Define(menu: .exitGame, parent: .main)*/
 	}
 	
 	// -- Main Menu buttons
@@ -136,11 +136,11 @@ class MainMenuViewController: UIViewController {
 			self.performSegueToReturnBack(kCATransitionFromLeft)
 		}
 	}
-	
+	/*
 	@objc func ExitClicked() {
 		MenuBy(id: .main).SwitchTo(menu: MenuBy(id: .exitGame), isLowerMenu: true)
 	}
-	
+	*/
 	// -- New Game buttons
 	
 	@objc func NormalNewGameClicked() {
@@ -187,13 +187,13 @@ class MainMenuViewController: UIViewController {
 	}
 	
 	// -- Exit Menu buttons
-	
+	/*
 	@objc func ExitConfirmClicked() { }
 	
 	@objc func BackFromExitGameClicked() {
 		MenuBy(id: .exitGame).SwitchTo(menu: MenuBy(id: .main), isLowerMenu: false)
 	}
-	
+	*/
 	// -- Others
 	
 	func Close(menu: MenuID) {
