@@ -33,11 +33,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="aHE-Q1-Jsp">
-                                <rect key="frame" x="0.0" y="40" width="375" height="627"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1X-Lu-plE" customClass="TriangleView" customModule="Minesweeper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="40" width="126" height="126"/>
+                                <rect key="frame" x="0.0" y="20" width="126" height="126"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="P1X-Lu-plE" secondAttribute="height" multiplier="1:1" id="AIz-fc-zLt"/>
@@ -131,11 +131,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hti-B6-UV8" customClass="TriangleView" customModule="Minesweeper" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hti-B6-UV8" customClass="TriangleView" customModule="Minesweeper" customModuleProvider="target">
                                 <rect key="frame" x="244" y="529.5" width="131" height="131"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Hti-B6-UV8" secondAttribute="height" multiplier="1:1" id="91M-dz-Rv2"/>
+                                    <constraint firstAttribute="width" constant="131" id="cOl-VU-I2h"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="positionTop" value="NO"/>
