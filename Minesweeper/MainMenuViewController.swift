@@ -16,11 +16,12 @@ class MainMenuViewController: UIViewController {
 	var m_gameViewController : GameViewController?
 
 	private var m_menus : [Menu] = [Menu]()
+	private var m_stats : [MenuStat] = [MenuStat]()
 	
 	enum MenuID : Int {
-		case main = 0, newGame, topListChoice, normalTopList, largeTopList //, exitGame
+		case main = 0, newGame, topListChoice, normalTopList, largeTopList // DON'T FORGET COUNT!
 		
-		static let count : Int = 6
+		static let count : Int = 5
 	}
 	
 	func MenuBy(id: MenuID) -> Menu {
@@ -39,6 +40,7 @@ class MainMenuViewController: UIViewController {
 		backgroundHighlight.image = GraphicsManager.sharedInstance.highlightGraphic
 
 		ConstructMenus()
+		ConstructStats()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +50,7 @@ class MainMenuViewController: UIViewController {
 		
 		if !main.IsOpen() {
 			main.Open()
+			ShowStats()
 		}
 	}
 	
@@ -59,6 +62,7 @@ class MainMenuViewController: UIViewController {
 		MenuOption.viewHeight = view.bounds.height
 		
 		PositionMenuOptions()
+		PositionStats()
 	}
 
 	func PositionMenuOptions() {
@@ -66,6 +70,22 @@ class MainMenuViewController: UIViewController {
 
 		for i in 0..<m_menus.count {
 			m_menus[i].UpdateOptionPositions(breadcrump: breadcrumpPos)
+		}
+	}
+	
+	func PositionStats() {
+		
+	}
+	
+	func ShowStats() {
+		for stat in m_stats {
+			stat.Show(0)
+		}
+	}
+	
+	func HideStats() {
+		for stat in m_stats {
+			stat.Hide(0)
 		}
 	}
 	
@@ -110,13 +130,31 @@ class MainMenuViewController: UIViewController {
 		MenuBy(id: .largeTopList).Add(options: [ (title: "Test Large 31:02", action: #selector(TopListEntryClicked)) ],
 		                               backButtonAction: #selector(BackFromLargeTopListClicked), target: self)
 		Define(menu: .largeTopList, parent: .topListChoice)
+
+	}
+	
+	func ConstructStats() {
+		let stats : [(title: String, value: String)] = [
+			(title: "AVERAGE GAME LENGTH", value: Statistics.sharedInstance.averageGameTime),
+			(title: "TOTAL TIME PLAYED", value: Statistics.sharedInstance.totalTimePlayed),
+			(title: "GAMES LOST", value: "\(Statistics.sharedInstance.gamesLost)"),
+			(title: "GAMES WON", value: "\(Statistics.sharedInstance.gamesWon)"),
+			(title: "GAMES PLAYED", value: "\(Statistics.sharedInstance.totalGamesPlayed)")
+		]
+		var nextItemPos = Pos(20, view.bounds.size.height * 0.875)
 		
-		// -- Exit Menu
-		/*
-		m_menus.insert(Menu("exit game", backButton: "Back", backButtonType: .back, view: view), at: MenuID.exitGame.rawValue)
-		MenuBy(id: .exitGame).Add(options: [ (title: "Exit", action: #selector(ExitConfirmClicked)) ],
-		                         backButtonAction: #selector(BackFromExitGameClicked), target: self)
-		Define(menu: .exitGame, parent: .main)*/
+		for (title, value) in stats {
+			m_stats.append( MenuStat(title: title, value: value, view: view) )
+
+			m_stats.last!.Set(width: view.bounds.width - 40)
+			m_stats.last!.Set(pos: nextItemPos)
+			
+			nextItemPos	= Pos(20, m_stats.last!.GetPos().y - m_stats.last!.GetHeight() - 10)
+			
+			if m_stats.count == 2 {
+				nextItemPos.y -= 10
+			}
+		}
 	}
 	
 	// -- Main Menu buttons
@@ -136,11 +174,7 @@ class MainMenuViewController: UIViewController {
 			self.performSegueToReturnBack(kCATransitionFromLeft)
 		}
 	}
-	/*
-	@objc func ExitClicked() {
-		MenuBy(id: .main).SwitchTo(menu: MenuBy(id: .exitGame), isLowerMenu: true)
-	}
-	*/
+
 	// -- New Game buttons
 	
 	@objc func NormalNewGameClicked() {
@@ -186,14 +220,6 @@ class MainMenuViewController: UIViewController {
 		
 	}
 	
-	// -- Exit Menu buttons
-	/*
-	@objc func ExitConfirmClicked() { }
-	
-	@objc func BackFromExitGameClicked() {
-		MenuBy(id: .exitGame).SwitchTo(menu: MenuBy(id: .main), isLowerMenu: false)
-	}
-	*/
 	// -- Others
 	
 	func Close(menu: MenuID) {
