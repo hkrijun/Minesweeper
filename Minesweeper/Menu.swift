@@ -22,7 +22,7 @@ class Menu {
 	private var m_breadcrump : Breadcrump
 	private var m_options : [MenuOption] = [MenuOption]()
 	private let m_optionDelay : Double = 0.1
-	private var m_backButton : MenuOption
+	private var m_backButton : MenuOption?
 	private var m_parent : Menu?
 	
 	static var xPosition : CGFloat = 0 // For viewDidLoadSubViews events
@@ -38,11 +38,13 @@ class Menu {
 		set(value) { m_parent = value }
 	}
 	
-	init(_ breadcrump: String, backButton: String, backButtonType: MenuOption.OptionType, view: UIView) {
+	init(_ breadcrump: String, backButton: String?, backButtonType: MenuOption.OptionType?, view: UIView) {
 		m_breadcrump = Breadcrump(breadcrump, view: view)
-		m_backButton = MenuOption(backButton, view: view)
 		
-		m_backButton.Set(type: backButtonType)
+		if backButton != nil {
+			m_backButton = MenuOption(backButton!, view: view)
+			m_backButton!.Set(type: backButtonType ?? .normal)
+		}
 	}
 	
 	func RemoveAllOptions() {
@@ -56,7 +58,7 @@ class Menu {
 		}
 		
 		if backButtonAction != nil {
-			m_backButton.Set(action: backButtonAction!, target: target)
+			m_backButton!.Set(action: backButtonAction!, target: target)
 		}
 	}
 	
@@ -71,7 +73,9 @@ class Menu {
 			nextY += option.GetHeight() + Menu.margins
 		}
 		
-		m_backButton.Changed(pos: Pos(MenuOption.viewWidth - 20, MenuOption.viewHeight - 20), useBottomRightOrigo: true)
+		if m_backButton != nil {
+			m_backButton!.Changed(pos: Pos(MenuOption.viewWidth - 20, MenuOption.viewHeight - 20), useBottomRightOrigo: true)
+		}
 	}
 	
 	func UpdateBreadcrumpPos(_ _breadcrump: Pos? = nil) {
@@ -105,7 +109,9 @@ class Menu {
 			}
 		}
 		
-		m_backButton.Show(delay: Double(m_options.count) * m_optionDelay)
+		if m_backButton != nil {
+			m_backButton!.Show(delay: Double(m_options.count) * m_optionDelay)
+		}
 	}
 	
 	func Close(keepBreadcrump: Bool, durationMultiplier: Double = 1, delayMultiplier: Double = 1, completion: @escaping (Bool) -> Void = { _ in } ) { // Different approach, same result
@@ -118,7 +124,9 @@ class Menu {
 			delay += m_optionDelay
 		}
 		
-		m_backButton.Hide(delay: delay, durationMultiplier: durationMultiplier, delayMultiplier: delayMultiplier, completion: completion)
+		if m_backButton != nil {
+			m_backButton!.Hide(delay: delay, durationMultiplier: durationMultiplier, delayMultiplier: delayMultiplier, completion: completion)
+		}
 	}
 	
 	func IsOpen() -> Bool {
