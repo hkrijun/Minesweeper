@@ -51,10 +51,10 @@ class Statistics {
 	// -- Data saving and restoring
 	
 	private init() {
-		LoadSettings()
+		LoadAll()
 	}
 	
-	private func LoadSettings() {
+	private func LoadAll() {
 		m_totalSecondsPlayed = m_settings.integer(forKey: Settings.totalSecondsPlayed)
 		m_gamesWon = m_settings.integer(forKey: Settings.gamesWon)
 		m_gamesLost = m_settings.integer(forKey: Settings.gamesLost)
@@ -62,7 +62,7 @@ class Statistics {
 		m_scoreLists = m_settings.object(forKey: Settings.scoreLists) as? [[Score]] ?? [[Score]]()
 	}
 	
-	private func SaveSettings() {
+	private func SaveAll() {
 		SaveStats()
 		SaveScores()
 	}
@@ -122,6 +122,7 @@ class Statistics {
 			positionOnScoreList = ProposeScore(toList: mapSize, seconds: secondsPlayed)
 		}
 		
+		SaveStats()
 		return positionOnScoreList
 	}
 	
@@ -149,6 +150,8 @@ class Statistics {
 		if scoreList.count > SCORES_PER_LIST {
 			scoreList.removeLast()
 		}
+		
+		SaveScores()
 	}
 
 	private func Get(scoreList: ScoreList) -> [Score] {
