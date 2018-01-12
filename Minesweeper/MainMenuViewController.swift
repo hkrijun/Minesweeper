@@ -193,7 +193,13 @@ class MainMenuViewController: UIViewController {
 	@objc func NormalNewGameClicked() {
 		if let gameView = m_gameViewController {
 			Close(menu: .newGame)
-			_ = Statistics.sharedInstance.GameFinished(secondsPlayed: gameView.m_seconds, endTo: .Restarted, mapSize: .NormalMap)
+			
+			let gameState = gameView.GetGameState()
+			
+			if gameState.playing {
+				_ = Statistics.sharedInstance.GameFinished(secondsPlayed: gameState.secondsPlayed, endTo: .Restarted, mapSize: .NormalMap)
+			}
+			
 			gameView.StartNewGame()
 		}
 	}

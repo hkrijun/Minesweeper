@@ -14,32 +14,43 @@ protocol GameViewControllerDelegate {
 
 class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDelegate {
 	
+	// -- Storyboard variables
+	
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var plotsLabel: UILabel!
 	@IBOutlet weak var plotsSubLabel: UILabel!
 	@IBOutlet weak var timeLabel: UILabel!
+	
+	// -- Datatypes
 	
 	private enum label { // Label ID
 		static let plots : Int = 0
 		static let percent : Int = 1
 	}
 	
-	var m_delegate : GameViewControllerDelegate?
+	// -- Private variables
 	
-	var m_animatingLabels = [ AnimateValue(), AnimateValue() ]
+	private var m_delegate : GameViewControllerDelegate?
 	
-	var m_displayLink : CADisplayLink?
-	var m_timer : Timer?
-	var m_seconds : Int = 0
-	var m_timerPaused : Bool = true
+	private var m_animatingLabels = [ AnimateValue(), AnimateValue() ]
 	
-	var m_minefield : Minefield?
-	var m_selectedBlock : Block?
-	var m_selectedBlockUI : SelectedBlockUI?
-	var m_previousClearBlocks : Int?
-	var m_lastSeletedBlockPosition = Pos(0, 0)
+	private var m_displayLink : CADisplayLink?
+	private var m_timer : Timer?
+	private var m_seconds : Int = 0
+	private var m_timerPaused : Bool = true
+	
+	private var m_playerWon : Bool = false
+	private var m_mapType : Statistics.ScoreList = .NormalMap
+	
+	private var m_minefield : Minefield?
+	private var m_selectedBlock : Block?
+	private var m_selectedBlockUI : SelectedBlockUI?
+	private var m_previousClearBlocks : Int?
+	private var m_lastSeletedBlockPosition = Pos(0, 0)
 	
 	private var lastScrollToTargetPos : Pos = Pos()
+	
+	// -- Functions
 	
 	override var prefersStatusBarHidden: Bool {
 		return true
@@ -71,11 +82,15 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	
 	// -- New Game
 	
-	func StartNewGame(mapSize: Int = 30) {
+	func StartNewGame(mapType: Statistics.ScoreList = .NormalMap) {
+		m_mapType = mapType
+		let mapSize = mapType == .NormalMap ? 30 : 60
+		
 		let blockSize : Int = 50 // TODO: calculate from res+dpi https://github.com/marchv/UIScreenExtension
 		let boardSize = CGSize(width: mapSize * blockSize, height: mapSize * blockSize)
 
 		scrollView.contentSize = boardSize
+		m_playerWon = false
 		
 		m_minefield!.SetParameters(width: mapSize * blockSize, height: mapSize * blockSize, blockSize: blockSize)
 		m_minefield!.Create(scrollView)
@@ -119,7 +134,10 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	
 	func StartTimers() {
 		m_timerPaused = false
-		m_timer = Timer.scheduledTimer(timeInterval: 1, target: self,  selector: (#selector(GameViewController.UpdateTimeLabel)), userInfo: nil, repeats: true)
+		
+		if m_timer == nil {
+			m_timer = Timer.scheduledTimer(timeInterval: 1, target: self,  selector: (#selector(GameViewController.UpdateTimeLabel)), userInfo: nil, repeats: true)
+		}
 	}
 	
 	func UpdateTimeLabel() {
@@ -189,6 +207,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	
 	func HitBomb() {
 		StopTimers()
+		_ = Statistics.sharedInstance.GameFinished(secondsPlayed: m_seconds, endTo: .Lost, mapSize: m_mapType)
 		
 		let textPos = GetScrollPos() + Pos(scrollView.frame.width * 0.5, scrollView.frame.height * 0.5)
 		ShowFadingNotification("GAME OVER", color: UIColor(red: 0.65, green: 0, blue: 0, alpha: 1),
@@ -199,18 +218,25 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	
 	func PlayerWins() {
 		StopTimers()
+		_ = Statistics.sharedInstance.GameFinished(secondsPlayed: m_seconds, endTo: .Won, mapSize: m_mapType) // To do: ask name
+		m_playerWon = true
+	}
+	
+	func GetGameState() -> (playing: Bool, won: Bool, secondsPlayed: Int) {
+		return (playing: m_timer != nil, won: m_playerWon, secondsPlayed: m_seconds)
 	}
 	
 	// Selected tile ui delegate:
 	
 	func BlockOpenClicked() {
 		if let block = m_selectedBlock {
-			self.m_minefield?.CheckBlock(block.m_location)
 			HideSelectedBlockUI()
 			
 			if m_timer == nil {
 				StartTimers()
 			}
+			
+			self.m_minefield?.CheckBlock(block.m_location)
 		}
 	}
 	
