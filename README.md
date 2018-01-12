@@ -19,6 +19,7 @@ Basic Minesweeper clone created for an iOS course as a training project.
 - Proper Game Over event
   - Player name input in case a high score is reached
 - Gather and save statistics and create a high score list
+- Connect menu actions
 - Enhancements here and there
   
-  Expected to be completed in February 2018.
+> Expected to be completed in February 2018.
