@@ -12,6 +12,7 @@ class MainMenuViewController: UIViewController {
 	
 	@IBOutlet weak var backgroundHighlight: UIImageView!
 	@IBOutlet weak var menuImage: MenuImage!
+	@IBOutlet weak var logoLabel: PaddedLabel!
 	
 	var m_gameViewController : GameViewController?
 
@@ -39,8 +40,11 @@ class MainMenuViewController: UIViewController {
 		
 		backgroundHighlight.image = GraphicsManager.sharedInstance.highlightGraphic
 
-		ConstructMenus()
 		ConstructStats()
+		view.bringSubview(toFront: backgroundHighlight)
+		view.bringSubview(toFront: menuImage)
+		view.bringSubview(toFront: logoLabel)
+		ConstructMenus()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -78,14 +82,20 @@ class MainMenuViewController: UIViewController {
 	}
 	
 	func ShowStats() {
+		var delay : Double = 0.1
+		
 		for stat in m_stats {
-			stat.Show(0)
+			stat.Show(delay)
+			delay += 0.1
 		}
 	}
 	
 	func HideStats() {
+		var delay : Double = 0.1
+		
 		for stat in m_stats {
-			stat.Hide(0)
+			stat.Hide(delay)
+			delay += 0.1
 		}
 	}
 	
@@ -149,10 +159,10 @@ class MainMenuViewController: UIViewController {
 			m_stats.last!.Set(width: view.bounds.width - 40)
 			m_stats.last!.Set(pos: nextItemPos)
 			
-			nextItemPos	= Pos(20, m_stats.last!.GetPos().y - m_stats.last!.GetHeight() - 10)
+			nextItemPos.y = m_stats.last!.GetPos().y - m_stats.last!.GetHeight() - 5
 			
-			if m_stats.count == 2 {
-				nextItemPos.y -= 10
+			if m_stats.count == 2 { // Extra offset after Total Time Played
+				nextItemPos.y -= 20
 			}
 		}
 	}
@@ -160,14 +170,17 @@ class MainMenuViewController: UIViewController {
 	// -- Main Menu buttons
 	
 	@objc func OpenNewGameMenu() {
+		HideStats()
 		MenuBy(id: .main).SwitchTo(menu: MenuBy(id: .newGame), isLowerMenu: true)
 	}
 	
 	@objc func OpenTopListMenu() {
+		HideStats()
 		MenuBy(id: .main).SwitchTo(menu: MenuBy(id: .topListChoice), isLowerMenu: true)
 	}
 	
 	@objc func ContinueClicked() {
+		HideStats()
 		MenuBy(id: .main).Close(keepBreadcrump: false, durationMultiplier: 0.25, delayMultiplier: 0.25)
 		
 		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
@@ -180,6 +193,7 @@ class MainMenuViewController: UIViewController {
 	@objc func NormalNewGameClicked() {
 		if let gameView = m_gameViewController {
 			Close(menu: .newGame)
+			_ = Statistics.sharedInstance.GameFinished(secondsPlayed: gameView.m_seconds, endTo: .Restarted, mapSize: .NormalMap)
 			gameView.StartNewGame()
 		}
 	}
@@ -189,6 +203,7 @@ class MainMenuViewController: UIViewController {
 	}
 	
 	@objc func BackFromNewGameClicked() {
+		ShowStats()
 		MenuBy(id: .newGame).SwitchTo(menu: MenuBy(id: .main), isLowerMenu: false)
 	}
 	
@@ -203,6 +218,7 @@ class MainMenuViewController: UIViewController {
 	}
 	
 	@objc func BackFromTopListChoiceClicked() {
+		ShowStats()
 		MenuBy(id: .topListChoice).SwitchTo(menu: MenuBy(id: .main), isLowerMenu: false)
 	}
 	
