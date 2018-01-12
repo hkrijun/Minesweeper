@@ -132,11 +132,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hti-B6-UV8" customClass="TriangleView" customModule="Minesweeper" customModuleProvider="target">
-                                <rect key="frame" x="244" y="529.5" width="131" height="131"/>
+                                <rect key="frame" x="187.5" y="473" width="187.5" height="187.5"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Hti-B6-UV8" secondAttribute="height" multiplier="1:1" id="91M-dz-Rv2"/>
-                                    <constraint firstAttribute="width" constant="131" id="cOl-VU-I2h"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="positionTop" value="NO"/>
@@ -149,6 +148,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRF-Qo-fQZ" userLabel="BottomBar">
                                 <rect key="frame" x="0.0" y="660" width="375" height="6.5"/>
                                 <color key="backgroundColor" red="0.081600000000000006" green="0.1072" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkb-PN-Uuu" userLabel="StatBar">
+                                <rect key="frame" x="13" y="616.5" width="150" height="4"/>
+                                <color key="backgroundColor" red="0.081600000000000006" green="0.1072" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="tgd-h1-365"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKs-vB-6G5" userLabel="LeftBar">
                                 <rect key="frame" x="0.0" y="0.0" width="13" height="660.5"/>
@@ -190,18 +196,22 @@
                         </subviews>
                         <color key="backgroundColor" red="0.10349999999999999" green="0.13294999999999998" blue="0.14999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Hti-B6-UV8" firstAttribute="width" secondItem="SzY-5O-naL" secondAttribute="width" multiplier="0.5" id="1Za-1w-rdh"/>
                             <constraint firstItem="0np-Na-aXm" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" constant="40" id="2Ys-zA-cGa"/>
                             <constraint firstItem="3yG-XY-dud" firstAttribute="top" secondItem="SzY-5O-naL" secondAttribute="top" id="7Yr-Nd-To2"/>
                             <constraint firstAttribute="bottom" secondItem="dRF-Qo-fQZ" secondAttribute="bottom" id="87i-KL-7dE"/>
+                            <constraint firstItem="pkb-PN-Uuu" firstAttribute="leading" secondItem="nKs-vB-6G5" secondAttribute="trailing" id="9Bt-Wo-c83"/>
                             <constraint firstItem="dRF-Qo-fQZ" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" id="DDB-aW-3XJ"/>
                             <constraint firstAttribute="trailing" secondItem="dRF-Qo-fQZ" secondAttribute="trailing" id="L7D-wY-Dro"/>
                             <constraint firstItem="dRF-Qo-fQZ" firstAttribute="height" secondItem="nKs-vB-6G5" secondAttribute="width" multiplier="0.5" id="LE1-zU-p2l"/>
                             <constraint firstAttribute="trailing" secondItem="Hti-B6-UV8" secondAttribute="trailing" id="SAP-c0-WXM"/>
+                            <constraint firstItem="pkb-PN-Uuu" firstAttribute="width" secondItem="SzY-5O-naL" secondAttribute="width" multiplier="0.4" id="SfD-TN-ERH"/>
                             <constraint firstAttribute="bottom" secondItem="3yG-XY-dud" secondAttribute="bottom" id="UKA-KO-uRN"/>
                             <constraint firstItem="dRF-Qo-fQZ" firstAttribute="top" secondItem="Hti-B6-UV8" secondAttribute="bottom" id="YNk-ch-LK4"/>
                             <constraint firstItem="vmD-6G-33G" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" constant="40" id="aOX-9z-vSC"/>
                             <constraint firstItem="nKs-vB-6G5" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" id="bi4-pD-XLo"/>
                             <constraint firstItem="vmD-6G-33G" firstAttribute="height" secondItem="0np-Na-aXm" secondAttribute="height" id="cH8-G1-uFB"/>
+                            <constraint firstAttribute="bottom" secondItem="pkb-PN-Uuu" secondAttribute="bottom" multiplier="1.075" id="dCp-bv-dEx"/>
                             <constraint firstItem="0np-Na-aXm" firstAttribute="width" secondItem="SzY-5O-naL" secondAttribute="width" multiplier="0.125" priority="750" id="dSZ-Lr-93q"/>
                             <constraint firstItem="vmD-6G-33G" firstAttribute="top" secondItem="0np-Na-aXm" secondAttribute="bottom" id="dzq-7J-cJT"/>
                             <constraint firstItem="3yG-XY-dud" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" id="fEI-Ta-9V4"/>
@@ -214,6 +224,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundHighlight" destination="3yG-XY-dud" id="f8d-Ui-67G"/>
+                        <outlet property="logoLabel" destination="vmD-6G-33G" id="13m-eW-3Gb"/>
                         <outlet property="menuImage" destination="0np-Na-aXm" id="PT6-ZZ-KBN"/>
                     </connections>
                 </viewController>
