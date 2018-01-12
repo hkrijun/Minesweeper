@@ -76,7 +76,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 		let boardSize = CGSize(width: mapSize * blockSize, height: mapSize * blockSize)
 
 		scrollView.contentSize = boardSize
-
+		
 		m_minefield!.SetParameters(width: mapSize * blockSize, height: mapSize * blockSize, blockSize: blockSize)
 		m_minefield!.Create(scrollView)
 		
