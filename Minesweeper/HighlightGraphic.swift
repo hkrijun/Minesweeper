@@ -32,13 +32,13 @@ class HighlightGraphic : GameGraphic {
 		
 		// -- Colours
 		
-		let backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+		let backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
 		let highlightColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
 		
 		// -- Vars
 		
-		let edgeBlackSize : CGFloat = size.width * 0.2
-		let highlightBlurRadius : CGFloat = size.width * 1
+		let edgeBlackSize : CGFloat = size.width * 0.15
+		let highlightBlurRadius : CGFloat = size.width * 0.75
 		
 		// -- Background
 		
