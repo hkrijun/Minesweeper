@@ -110,7 +110,7 @@ class Menu {
 		}
 		
 		if m_backButton != nil {
-			m_backButton!.Show(delay: Double(m_options.count) * m_optionDelay)
+			m_backButton!.Show(delay: 0) // Double(m_options.count) * m_optionDelay)
 		}
 	}
 	
@@ -125,7 +125,7 @@ class Menu {
 		}
 		
 		if m_backButton != nil {
-			m_backButton!.Hide(delay: delay, durationMultiplier: durationMultiplier, delayMultiplier: delayMultiplier, completion: completion)
+			m_backButton!.Hide(delay: 0, durationMultiplier: durationMultiplier, delayMultiplier: delayMultiplier, completion: completion)
 		}
 	}
 	
