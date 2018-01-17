@@ -8,10 +8,12 @@
 
 import UIKit
 
-class MenuOption {
-	var m_button : UIButton
-	var m_x : CGFloat = 0
-	var m_hidden : Bool = true
+class MenuOption : MenuObject {
+	
+	private var m_button : UIButton
+	private var m_x : CGFloat = 0
+	private var m_hidden : Bool = true
+	private var m_hideDirection : HideDirection = .Left
 	
 	static var viewWidth : CGFloat = 0
 	static var viewHeight : CGFloat = 0
@@ -74,6 +76,10 @@ class MenuOption {
 		m_button.frame.origin = pos.ToCGPoint()
 	}
 	
+	func Set(hideDirection: HideDirection) {
+		m_hideDirection = hideDirection
+	}
+	
 	func Changed(pos _pos: Pos, useBottomRightOrigo: Bool = false) {
 		let pos = useBottomRightOrigo ? Pos(_pos.x - m_button.frame.width, _pos.y - m_button.frame.height) : _pos
 		
@@ -89,28 +95,49 @@ class MenuOption {
 		return m_button.frame.height
 	}
 	
-	func Hide() {
-		m_hidden = true
-		self.m_button.frame.origin = CGPoint(x: MenuOption.viewWidth, y: self.m_button.frame.origin.y)
+	func IsHidden() -> Bool {
+		return m_hidden
 	}
 	
-	func Hide(delay: Double, durationMultiplier: Double = 1, delayMultiplier: Double = 1, completion: @escaping (Bool) -> Void = { _ in } ) {
+	func Hide(_ completion: ((Bool) -> Void)? = nil) {
 		m_hidden = true
+		self.m_button.frame.origin = CGPoint(x: hideDestinationPosition, y: self.m_button.frame.origin.y)
+		_ = completion
+	}
+	
+	func Hide(delay: Double, durationMultiplier: Double = 1, delayMultiplier: Double = 1, completion: ((Bool) -> Void)? = nil ) {
+		m_hidden = true
+		m_button.frame.origin.x = m_x
+		
 		UIView.animate(withDuration: MenuOption.animDuration * durationMultiplier, delay: delay * delayMultiplier, options: .curveEaseInOut, animations: {
-			self.m_button.frame.origin = CGPoint(x: MenuOption.viewWidth, y: self.m_button.frame.origin.y)
+			self.m_button.frame.origin = CGPoint(x: self.hideDestinationPosition, y: self.m_button.frame.origin.y)
 		}, completion: completion)
 	}
 	
 	func Show() {
 		m_hidden = false
-		self.m_button.frame.origin = CGPoint(x: self.m_x, y: self.m_button.frame.origin.y)
+		m_button.frame.origin = CGPoint(x: self.m_x, y: self.m_button.frame.origin.y)
 	}
 	
 	func Show(delay: Double) {
 		m_hidden =  false
+		m_button.frame.origin.x = showOriginPosition
+		
 		UIView.animate(withDuration: MenuOption.animDuration, delay: delay, options: .curveEaseInOut, animations: {
 			self.m_button.frame.origin = CGPoint(x: self.m_x, y: self.m_button.frame.origin.y)
 		}, completion: nil)
+	}
+	
+	private var hideDestinationPosition : CGFloat {
+		get {
+			return m_hideDirection == .Left ? -m_button.frame.width : MenuOption.viewWidth
+		}
+	}
+	
+	private var showOriginPosition : CGFloat {
+		get {
+			return m_hideDirection == .Left ? MenuOption.viewWidth : -m_button.frame.width
+		}
 	}
 }
 

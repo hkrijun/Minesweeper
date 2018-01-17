@@ -10,7 +10,7 @@ import Foundation
 
 class Statistics {
 	
-	let SCORES_PER_LIST : Int = 5
+	let SCORES_PER_LIST : Int = 10 // Dummy Names in LoadAll() !!
 	
 	static let sharedInstance = Statistics()
 
@@ -38,6 +38,8 @@ class Statistics {
 	
 	enum ScoreList : Int {
 		case NormalMap = 0, LargeMap = 1
+		
+		static let count : Int = 2
 	}
 	
 	enum Settings {
@@ -60,6 +62,20 @@ class Statistics {
 		m_gamesLost = m_settings.integer(forKey: Settings.gamesLost)
 		m_gamesRestarted = m_settings.integer(forKey: Settings.gamesRestarted)
 		m_scoreLists = m_settings.object(forKey: Settings.scoreLists) as? [[Score]] ?? [[Score]]()
+		
+		let dummyNames : [String] = [ "Ossi", "Essi", "Jonna", "Jonne", "Matti Meikäläinen", "Apumies", "Jamppa", "Dale", "Muumipappa", "Mörkö" ]
+		
+		while m_scoreLists.count < ScoreList.count {
+			m_scoreLists.append( [Score]() )
+		}
+		
+		for scoreListNum in 0..<m_scoreLists.count {
+			if m_scoreLists[scoreListNum].count == 0 {
+				for i in 0..<SCORES_PER_LIST {
+					m_scoreLists[scoreListNum].append( Score(name: dummyNames[i], seconds: 300 + scoreListNum * 300 + i * 30) )
+				}
+			}
+		}
 	}
 	
 	private func SaveAll() {
@@ -126,6 +142,7 @@ class Statistics {
 		return positionOnScoreList
 	}
 	
+	/// Returns position for new score, -1 in case it's not a high score
 	private func ProposeScore(toList _scoreList: ScoreList, seconds: Int) -> Int {
 		let scoreLists = Get(scoreList: _scoreList)
 		
@@ -154,14 +171,20 @@ class Statistics {
 		SaveScores()
 	}
 
-	private func Get(scoreList: ScoreList) -> [Score] {
+	func Get(scoreList: ScoreList) -> [Score] {
 		let scoreListNum = scoreList.rawValue
-		
-		repeat {
-			m_scoreLists.append([Score]())
-		} while m_scoreLists.count < scoreListNum
-		
+
 		return m_scoreLists[scoreListNum]
+	}
+	
+	func Get(formattedScoreList scoreList: ScoreList) -> [(name: String, score: String)] {
+		var list = [(name: String, score: String)]()
+		
+		for score in m_scoreLists[scoreList.rawValue] {
+			list.append( (name: score.name, score: Format(secondsToTime: score.seconds)) )
+		}
+		
+		return list
 	}
 	
 	private func Format(secondsToTime seconds: Int) -> String {

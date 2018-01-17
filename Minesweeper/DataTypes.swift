@@ -37,6 +37,21 @@ struct Pos {
 		self.y = y
 	}
 	
+	init(x: CGFloat = 0, y: CGFloat = 0) {
+		self.x = x
+		self.y = y
+	}
+	
+	init(x: CGFloat) {
+		self.x = x
+		self.y = 0
+	}
+	
+	init(y: CGFloat) {
+		self.x = 0
+		self.y = y
+	}
+	
 	init(_ cgSize: CGSize) {
 		self.x = cgSize.width
 		self.y = cgSize.height
@@ -88,4 +103,8 @@ enum MineAppearance {
 
 enum Direction {
 	case Up, Down, Left, Right
+}
+
+enum HideDirection {
+	case Left, Right
 }

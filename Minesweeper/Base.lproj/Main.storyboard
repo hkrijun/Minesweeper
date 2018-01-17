@@ -127,7 +127,7 @@
                         <viewControllerLayoutGuide type="top" id="ema-VD-R65"/>
                         <viewControllerLayoutGuide type="bottom" id="QaJ-o9-io3"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SzY-5O-naL">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="SzY-5O-naL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -150,10 +150,10 @@
                                 <color key="backgroundColor" red="0.081600000000000006" green="0.1072" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkb-PN-Uuu" userLabel="StatBar">
-                                <rect key="frame" x="13" y="616.5" width="150" height="4"/>
+                                <rect key="frame" x="13" y="648" width="187.5" height="2"/>
                                 <color key="backgroundColor" red="0.081600000000000006" green="0.1072" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="4" id="tgd-h1-365"/>
+                                    <constraint firstAttribute="height" constant="2" id="tgd-h1-365"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKs-vB-6G5" userLabel="LeftBar">
@@ -205,13 +205,13 @@
                             <constraint firstAttribute="trailing" secondItem="dRF-Qo-fQZ" secondAttribute="trailing" id="L7D-wY-Dro"/>
                             <constraint firstItem="dRF-Qo-fQZ" firstAttribute="height" secondItem="nKs-vB-6G5" secondAttribute="width" multiplier="0.5" id="LE1-zU-p2l"/>
                             <constraint firstAttribute="trailing" secondItem="Hti-B6-UV8" secondAttribute="trailing" id="SAP-c0-WXM"/>
-                            <constraint firstItem="pkb-PN-Uuu" firstAttribute="width" secondItem="SzY-5O-naL" secondAttribute="width" multiplier="0.4" id="SfD-TN-ERH"/>
+                            <constraint firstItem="pkb-PN-Uuu" firstAttribute="width" secondItem="SzY-5O-naL" secondAttribute="width" multiplier="0.5" id="SfD-TN-ERH"/>
                             <constraint firstAttribute="bottom" secondItem="3yG-XY-dud" secondAttribute="bottom" id="UKA-KO-uRN"/>
                             <constraint firstItem="dRF-Qo-fQZ" firstAttribute="top" secondItem="Hti-B6-UV8" secondAttribute="bottom" id="YNk-ch-LK4"/>
                             <constraint firstItem="vmD-6G-33G" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" constant="40" id="aOX-9z-vSC"/>
                             <constraint firstItem="nKs-vB-6G5" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" id="bi4-pD-XLo"/>
                             <constraint firstItem="vmD-6G-33G" firstAttribute="height" secondItem="0np-Na-aXm" secondAttribute="height" id="cH8-G1-uFB"/>
-                            <constraint firstAttribute="bottom" secondItem="pkb-PN-Uuu" secondAttribute="bottom" multiplier="1.075" id="dCp-bv-dEx"/>
+                            <constraint firstItem="dRF-Qo-fQZ" firstAttribute="top" secondItem="pkb-PN-Uuu" secondAttribute="bottom" constant="10" id="dCp-bv-dEx"/>
                             <constraint firstItem="0np-Na-aXm" firstAttribute="width" secondItem="SzY-5O-naL" secondAttribute="width" multiplier="0.125" priority="750" id="dSZ-Lr-93q"/>
                             <constraint firstItem="vmD-6G-33G" firstAttribute="top" secondItem="0np-Na-aXm" secondAttribute="bottom" id="dzq-7J-cJT"/>
                             <constraint firstItem="3yG-XY-dud" firstAttribute="leading" secondItem="SzY-5O-naL" secondAttribute="leading" id="fEI-Ta-9V4"/>
@@ -226,6 +226,7 @@
                         <outlet property="backgroundHighlight" destination="3yG-XY-dud" id="f8d-Ui-67G"/>
                         <outlet property="logoLabel" destination="vmD-6G-33G" id="13m-eW-3Gb"/>
                         <outlet property="menuImage" destination="0np-Na-aXm" id="PT6-ZZ-KBN"/>
+                        <outlet property="statBar" destination="pkb-PN-Uuu" id="WE7-qh-LHd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BD8-3R-un7" userLabel="First Responder" sceneMemberID="firstResponder"/>

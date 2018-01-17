@@ -48,7 +48,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	private var m_previousClearBlocks : Int?
 	private var m_lastSeletedBlockPosition = Pos(0, 0)
 	
-	private var lastScrollToTargetPos : Pos = Pos()
+	private var m_lastScrollToTargetPos : Pos = Pos()
 	
 	// -- Functions
 	
@@ -89,6 +89,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 		let blockSize : Int = 50 // TODO: calculate from res+dpi https://github.com/marchv/UIScreenExtension
 		let boardSize = CGSize(width: mapSize * blockSize, height: mapSize * blockSize)
 
+		m_lastScrollToTargetPos = Pos(0)
 		scrollView.contentSize = boardSize
 		m_playerWon = false
 		
@@ -100,8 +101,6 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 		m_timerPaused = false
 		UpdateTimeLabel()
 		m_timerPaused = true
-		
-		ScrollTo(x: 0, y: 0, animated: false, adhereToLimits: true)
 	}
 	
 	// -- Ran during screen refreshes (something better?)
@@ -309,7 +308,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	}
 	
 	override func childDismissed() {
-		ScrollTo(x: lastScrollToTargetPos.x, y: lastScrollToTargetPos.y, animated: false, adhereToLimits: false) // Scrolling beyond limits doesn't seem to stay beyond view transitions
+		ScrollTo(x: m_lastScrollToTargetPos.x, y: m_lastScrollToTargetPos.y, animated: false, adhereToLimits: false) // Scrolling beyond limits doesn't seem to stay beyond view transitions
 		
 		let pos = GetScrollPos() + Pos(view.bounds.size) * 0.5
 
@@ -339,7 +338,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 		}
 		//scrollView.setContentOffset(CGPoint(x: scrollToX, y: scrollToY), animated: animated)
 		
-		lastScrollToTargetPos = Pos(x, y)
+		m_lastScrollToTargetPos = Pos(x, y)
 	}
 	
 	func GetScrollPos() -> Pos {

@@ -16,6 +16,7 @@ Basic Minesweeper clone created for an iOS course as a training project.
   - Mostly programmatically generated
   
 ### To Do
+- Scale to screen size
 - Proper Game Over event
   - Player name input in case a high score is reached
 - Gather and save statistics and create a high score list

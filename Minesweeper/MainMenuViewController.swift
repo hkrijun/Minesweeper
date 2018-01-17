@@ -13,24 +13,17 @@ class MainMenuViewController: UIViewController {
 	@IBOutlet weak var backgroundHighlight: UIImageView!
 	@IBOutlet weak var menuImage: MenuImage!
 	@IBOutlet weak var logoLabel: PaddedLabel!
+	@IBOutlet weak var statBar: UIView!
 	
-	var m_gameViewController : GameViewController?
+	var m_gameViewController : GameViewController? // Set by creator/parent GameViewController
 
 	private var m_menus : [Menu] = [Menu]()
 	private var m_stats : [MenuStat] = [MenuStat]()
 	
-	enum MenuID : Int {
+	private enum MenuID : Int {
 		case main = 0, newGame, topListChoice, normalTopList, largeTopList // DON'T FORGET COUNT!
 		
 		static let count : Int = 5
-	}
-	
-	func MenuBy(id: MenuID) -> Menu {
-		return m_menus[id.rawValue]
-	}
-	
-	func Define(menu: MenuID, parent: MenuID) {
-		MenuBy(id: menu).parent = MenuBy(id: parent)
 	}
 	
 	// -- "Constructor"
@@ -42,21 +35,23 @@ class MainMenuViewController: UIViewController {
 
 		ConstructStats()
 		view.bringSubview(toFront: backgroundHighlight)
+		ConstructMenus()
 		view.bringSubview(toFront: menuImage)
 		view.bringSubview(toFront: logoLabel)
-		ConstructMenus()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
-		//self.viewDidAppear()
+		//self.viewDidAppear(animated)
 		
 		let main = MenuBy(id: .main)
 		
 		if !main.IsOpen() {
 			main.Open()
-			ShowStats()
+			ShowStats(startDelay: 0.125)
 		}
 	}
+	
+	// -- Positioning & presentation
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
@@ -69,37 +64,50 @@ class MainMenuViewController: UIViewController {
 		PositionStats()
 	}
 
-	func PositionMenuOptions() {
+	private func PositionMenuOptions() {
 		let breadcrumpPos = Pos(menuImage.frame.origin.x + menuImage.frame.width, menuImage.frame.origin.y + menuImage.frame.height * 0.5)
 
-		for i in 0..<m_menus.count {
-			m_menus[i].UpdateOptionPositions(breadcrump: breadcrumpPos)
+		for menu in m_menus {
+			menu.UpdateOptionPositions(breadcrump: breadcrumpPos)
 		}
 	}
 	
-	func PositionStats() {
-		
+	private func PositionStats() {
+		var nextItemPos = Pos(20, statBar.frame.minY)
+
+		for (index, stat) in m_stats.enumerated() {
+			stat.Set(width: view.bounds.width - 40)
+			stat.Changed(pos: nextItemPos - Pos(y: stat.GetHeight() + 5) )
+			
+			nextItemPos.y = stat.GetPos().y
+			
+			if index == 1 { // Extra offset after Total Time Played
+				nextItemPos.y -= 20
+			}
+		}
 	}
 	
-	func ShowStats() {
-		var delay : Double = 0.1
+	private func ShowStats(startDelay: Double = 0, delay _delay: Double = 0.1) {
+		var delay : Double = startDelay
 		
-		for stat in m_stats {
+		for stat in m_stats.reversed() {
 			stat.Show(delay)
-			delay += 0.1
+			delay += _delay
 		}
 	}
 	
-	func HideStats() {
-		var delay : Double = 0.1
+	private func HideStats(startDelay: Double = 0, delay _delay: Double = 0.1) {
+		var delay : Double = startDelay
 		
 		for stat in m_stats {
 			stat.Hide(delay)
-			delay += 0.1
+			delay += _delay
 		}
 	}
 	
-	func ConstructMenus() {
+	// -- Construction
+	
+	private func ConstructMenus() {
 		m_menus.removeAll()
 		m_menus.reserveCapacity(MenuID.count)
 		
@@ -129,21 +137,25 @@ class MainMenuViewController: UIViewController {
 		
 		// -- Normal Top List Menu
 		
+		let normalListScores = Statistics.sharedInstance.Get(formattedScoreList: .NormalMap)
+		
 		m_menus.insert(Menu("normal", backButton: "Back", backButtonType: .back, view: view), at: MenuID.normalTopList.rawValue)
-		MenuBy(id: .normalTopList).Add(options: [ (title: "Test 2:43", action: #selector(TopListEntryClicked)) ],
+		MenuBy(id: .normalTopList).Add(stats: normalListScores,
 		                               backButtonAction: #selector(BackFromNormalTopListClicked), target: self)
 		Define(menu: .normalTopList, parent: .topListChoice)
 		
 		// -- Large Top List Menu
 		
+		let largeListScores = Statistics.sharedInstance.Get(formattedScoreList: .LargeMap)
+		
 		m_menus.insert(Menu("large", backButton: "Back", backButtonType: .back, view: view), at: MenuID.largeTopList.rawValue)
-		MenuBy(id: .largeTopList).Add(options: [ (title: "Test Large 31:02", action: #selector(TopListEntryClicked)) ],
-		                               backButtonAction: #selector(BackFromLargeTopListClicked), target: self)
+		MenuBy(id: .largeTopList).Add(stats: largeListScores,
+		                              backButtonAction: #selector(BackFromLargeTopListClicked), target: self)
 		Define(menu: .largeTopList, parent: .topListChoice)
 
 	}
 	
-	func ConstructStats() {
+	private func ConstructStats() {
 		let stats : [(title: String, value: String)] = [
 			(title: "AVERAGE GAME LENGTH", value: Statistics.sharedInstance.averageGameTime),
 			(title: "TOTAL TIME PLAYED", value: Statistics.sharedInstance.totalTimePlayed),
@@ -151,19 +163,12 @@ class MainMenuViewController: UIViewController {
 			(title: "GAMES WON", value: "\(Statistics.sharedInstance.gamesWon)"),
 			(title: "GAMES PLAYED", value: "\(Statistics.sharedInstance.totalGamesPlayed)")
 		]
-		var nextItemPos = Pos(20, view.bounds.size.height * 0.875)
 		
+		m_stats.removeAll()
+
 		for (title, value) in stats {
 			m_stats.append( MenuStat(title: title, value: value, view: view) )
-
-			m_stats.last!.Set(width: view.bounds.width - 40)
-			m_stats.last!.Set(pos: nextItemPos)
-			
-			nextItemPos.y = m_stats.last!.GetPos().y - m_stats.last!.GetHeight() - 5
-			
-			if m_stats.count == 2 { // Extra offset after Total Time Played
-				nextItemPos.y -= 20
-			}
+			m_stats.last!.Hide()
 		}
 	}
 	
@@ -180,10 +185,10 @@ class MainMenuViewController: UIViewController {
 	}
 	
 	@objc func ContinueClicked() {
-		HideStats()
-		MenuBy(id: .main).Close(keepBreadcrump: false, durationMultiplier: 0.25, delayMultiplier: 0.25)
+		HideStats(startDelay: 0, delay: 0.05)
+		MenuBy(id: .main).Close(keepBreadcrump: false, durationMultiplier: 0.5, delayMultiplier: 0.5)
 		
-		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+		Delay(0.1) {
 			self.performSegueToReturnBack(kCATransitionFromLeft)
 		}
 	}
@@ -242,13 +247,29 @@ class MainMenuViewController: UIViewController {
 		
 	}
 	
-	// -- Others
+	// -- Menu helpers
 	
-	func Close(menu: MenuID) {
+	private func MenuBy(id: MenuID) -> Menu {
+		return m_menus[id.rawValue]
+	}
+	
+	private func Define(menu: MenuID, parent: MenuID) {
+		MenuBy(id: menu).parent = MenuBy(id: parent)
+	}
+	
+	private func Close(menu: MenuID) {
 		MenuBy(id: menu).Close(keepBreadcrump: false, durationMultiplier: 0.25, delayMultiplier: 0.25)
 		
-		self.performSegueToReturnBack(kCATransitionFromLeft)
+		Delay(0.1) {
+			self.performSegueToReturnBack(kCATransitionFromLeft)
+		}
 	}
+	
+	private func Delay(_ seconds: Double, closure: @escaping () -> () ) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: closure)
+	}
+	
+	// -- Others
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
