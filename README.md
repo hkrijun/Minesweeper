@@ -2,7 +2,7 @@
 Basic Minesweeper clone created for an iOS course as a training project.
 
 ## Built With
-* Xcode version 8/9
+* Xcode version ~~8/~~9
 * Swift 3
 
 ## Status
@@ -12,7 +12,7 @@ Basic Minesweeper clone created for an iOS course as a training project.
   - All graphics generated using Core Graphics
   - Minefield implemented using UI components intead of SpriteKit
 * Menu system
-  - Animated
+  - Dynamic and animated
   - Mostly programmatically generated
   
 ### To Do
