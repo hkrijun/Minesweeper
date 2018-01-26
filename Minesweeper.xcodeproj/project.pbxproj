@@ -40,6 +40,8 @@
 		BB78D40B1FDA7D79005B8BB7 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB78D40A1FDA7D79005B8BB7 /* SegueFromLeft.swift */; };
 		BB78D40D1FDA8016005B8BB7 /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB78D40C1FDA8016005B8BB7 /* SegueFromRight.swift */; };
 		BB78D4101FDA8CD2005B8BB7 /* ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB78D40F1FDA8CD2005B8BB7 /* ViewControllers.swift */; };
+		BB9526DE20172AC100F6E265 /* NewHighScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9526DD20172AC100F6E265 /* NewHighScoreViewController.swift */; };
+		BB9526E0201753A500F6E265 /* PrettyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9526DF201753A500F6E265 /* PrettyView.swift */; };
 		BBEC4F491FCC3C7D00662536 /* SelectedBlockUI_Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEC4F481FCC3C7D00662536 /* SelectedBlockUI_Button.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +81,8 @@
 		BB78D40A1FDA7D79005B8BB7 /* SegueFromLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
 		BB78D40C1FDA8016005B8BB7 /* SegueFromRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; };
 		BB78D40F1FDA8CD2005B8BB7 /* ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllers.swift; sourceTree = "<group>"; };
+		BB9526DD20172AC100F6E265 /* NewHighScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHighScoreViewController.swift; sourceTree = "<group>"; };
+		BB9526DF201753A500F6E265 /* PrettyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyView.swift; sourceTree = "<group>"; };
 		BBEC4F481FCC3C7D00662536 /* SelectedBlockUI_Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedBlockUI_Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +124,7 @@
 				771CE8B61F7B7F8C000E2DF1 /* GameViewController.swift */,
 				77B4930F1FB1D08800FDE974 /* SelectedBlockUI.swift */,
 				BB3A84AF1FDA7801003C6EBE /* MainMenuViewController.swift */,
+				BB9526DD20172AC100F6E265 /* NewHighScoreViewController.swift */,
 				771CE8B81F7B7F8C000E2DF1 /* Main.storyboard */,
 				771CE8BB1F7B7F8C000E2DF1 /* Assets.xcassets */,
 				771CE8BD1F7B7F8C000E2DF1 /* LaunchScreen.storyboard */,
@@ -179,6 +184,7 @@
 				BB67F9FD1FDE746A003CF7A8 /* PaddedLabel.swift */,
 				BB67F9FF1FDE8A8C003CF7A8 /* MenuImage.swift */,
 				BB3B0994200634A900F6EA60 /* Statistics.swift */,
+				BB9526DF201753A500F6E265 /* PrettyView.swift */,
 			);
 			name = Auxiliary;
 			sourceTree = "<group>";
@@ -270,6 +276,7 @@
 				BB383D7A1FD95B790039AEAE /* SelectedBlockGraphic.swift in Sources */,
 				BB67FA001FDE8A8C003CF7A8 /* MenuImage.swift in Sources */,
 				BB5231871FFE4887003938B7 /* Breadcrump.swift in Sources */,
+				BB9526E0201753A500F6E265 /* PrettyView.swift in Sources */,
 				771CE9091F7B9D86000E2DF1 /* PerlinGenerator.swift in Sources */,
 				BB78D40B1FDA7D79005B8BB7 /* SegueFromLeft.swift in Sources */,
 				77E685901FA8705D002CE87D /* CluedoGraphic.swift in Sources */,
@@ -277,6 +284,7 @@
 				771CE8B71F7B7F8C000E2DF1 /* GameViewController.swift in Sources */,
 				BB78D4101FDA8CD2005B8BB7 /* ViewControllers.swift in Sources */,
 				77B493101FB1D08800FDE974 /* SelectedBlockUI.swift in Sources */,
+				BB9526DE20172AC100F6E265 /* NewHighScoreViewController.swift in Sources */,
 				77D720A51FC559E2008E13DD /* AnimateValue.swift in Sources */,
 				77E6858E1FA86B73002CE87D /* DataTypes.swift in Sources */,
 				771EA4CD1F95FCE500B50915 /* GraphicsManager.swift in Sources */,

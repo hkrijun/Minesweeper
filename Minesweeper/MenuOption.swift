@@ -80,6 +80,7 @@ class MenuOption : MenuObject {
 		m_hideDirection = hideDirection
 	}
 	
+	/// Change position with respect to hidden state
 	func Changed(pos _pos: Pos, useBottomRightOrigo: Bool = false) {
 		let pos = useBottomRightOrigo ? Pos(_pos.x - m_button.frame.width, _pos.y - m_button.frame.height) : _pos
 		
@@ -127,6 +128,8 @@ class MenuOption : MenuObject {
 			self.m_button.frame.origin = CGPoint(x: self.m_x, y: self.m_button.frame.origin.y)
 		}, completion: nil)
 	}
+	
+	// -- Properties for Show() and Hide()
 	
 	private var hideDestinationPosition : CGFloat {
 		get {

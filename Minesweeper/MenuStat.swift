@@ -140,7 +140,9 @@ class MenuStat : MenuObject {
 	}
 	
 	/// Unused
-	func Set(action: Selector, target: Any?) {}
+	func Set(action: Selector, target: Any?) {
+		print( "MenuStat.Set(action: Selector, target: Any?) IS UNUSED" )
+	}
 	
 	func Hide() {
 		m_hidden = true

@@ -10,7 +10,16 @@ import UIKit
 
 @IBDesignable class PaddedLabel: UILabel {
 	
-	@IBInspectable var southbound : Bool = true
+	@IBInspectable var southbound : Bool = false {
+		didSet {
+			if self.southbound {
+				self.transform = translateRotateFlip()
+			}
+			
+			//self.setNeedsUpdateConstraints()
+			self.setNeedsLayout()
+		}
+	}
 	
 	@IBInspectable var topInset: CGFloat = 5.0
 	@IBInspectable var bottomInset: CGFloat = 5.0
@@ -29,7 +38,14 @@ import UIKit
 			
 			contentSize.height += topInset + bottomInset
 			contentSize.width += leftInset + rightInset
-			
+			/*
+			if self.southbound {
+				let height = contentSize.height
+				
+				contentSize.height = contentSize.width
+				contentSize.width = height
+			}
+			*/
 			return contentSize
 		}
 	}
@@ -37,7 +53,7 @@ import UIKit
 	override func layoutSubviews() {
 		super.layoutSubviews()
 
-		if southbound {
+		if self.southbound {
 			self.transform = translateRotateFlip()
 		}
 	}

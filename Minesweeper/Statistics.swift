@@ -27,9 +27,28 @@ class Statistics {
 	
 	// -- Data definitions
 	
-	struct Score {
+	@objc(StatisticsScore) class Score: NSObject, NSCoding {
 		var name : String
 		var seconds : Int
+		
+		init(name: String, seconds: Int) {
+			self.name = name
+			self.seconds = seconds
+		}
+		
+		func ToString() -> String {
+			return "\(name) - \(seconds)"
+		}
+		
+		func encode(with aCoder: NSCoder) {
+			aCoder.encode(name, forKey: "name")
+			aCoder.encode(seconds, forKey: "seconds")
+		}
+		
+		required init?(coder aDecoder: NSCoder) {
+			name = aDecoder.decodeObject(forKey: "name") as! String
+			seconds = aDecoder.decodeInteger(forKey: "seconds")
+		}
 	}
 	
 	enum EndType {
@@ -40,6 +59,16 @@ class Statistics {
 		case NormalMap = 0, LargeMap = 1
 		
 		static let count : Int = 2
+		
+		func ToString() -> String {
+			switch (self) {
+			case .NormalMap:
+				return "Normal"
+			case .LargeMap:
+				return "Large"
+			}
+		}
+		
 	}
 	
 	enum Settings {
@@ -61,8 +90,20 @@ class Statistics {
 		m_gamesWon = m_settings.integer(forKey: Settings.gamesWon)
 		m_gamesLost = m_settings.integer(forKey: Settings.gamesLost)
 		m_gamesRestarted = m_settings.integer(forKey: Settings.gamesRestarted)
-		m_scoreLists = m_settings.object(forKey: Settings.scoreLists) as? [[Score]] ?? [[Score]]()
+		//m_scoreLists = m_settings.object(forKey: Settings.scoreLists) as? [[Score]] ?? [[Score]]()
 		
+		if let scoreListsAsData = m_settings.object(forKey: Settings.scoreLists) as! NSData? {
+			if let scoreLists = NSKeyedUnarchiver.unarchiveObject(with: scoreListsAsData as Data) as? [[Score]] {
+				m_scoreLists = scoreLists
+			}
+		}
+		
+		if m_scoreLists.count == 0 {
+			FillScoreListsWithDummies()
+		}
+	}
+	
+	private func FillScoreListsWithDummies() {
 		let dummyNames : [String] = [ "Ossi", "Essi", "Jonna", "Jonne", "Matti Meikäläinen", "Apumies", "Jamppa", "Dale", "Muumipappa", "Mörkö" ]
 		
 		while m_scoreLists.count < ScoreList.count {
@@ -91,7 +132,8 @@ class Statistics {
 	}
 	
 	private func SaveScores() {
-		m_settings.set(m_scoreLists, forKey: Settings.scoreLists)
+		//m_settings.set(m_scoreLists, forKey: Settings.scoreLists)
+		m_settings.set(NSKeyedArchiver.archivedData(withRootObject: m_scoreLists), forKey: Settings.scoreLists)
 	}
 	
 	// -- Functions
@@ -160,12 +202,12 @@ class Statistics {
 	}
 	
 	func AddScore(toList _scoreList: ScoreList, position: Int, name: String, seconds: Int) {
-		var scoreList = Get(scoreList: _scoreList)
+		let scoreListNum = _scoreList.rawValue
 		
-		scoreList.insert(Score(name: name, seconds: seconds), at: position)
+		m_scoreLists[scoreListNum].insert(Score(name: name, seconds: seconds), at: position)
 		
-		if scoreList.count > SCORES_PER_LIST {
-			scoreList.removeLast()
+		if m_scoreLists[scoreListNum].count > SCORES_PER_LIST {
+			m_scoreLists[scoreListNum].removeLast()
 		}
 		
 		SaveScores()
@@ -187,13 +229,24 @@ class Statistics {
 		return list
 	}
 	
-	private func Format(secondsToTime seconds: Int) -> String {
+ 	func Format(secondsToTime seconds: Int) -> String {
 		let time = TimeInterval(seconds)
 		let hours = Int(time) / 3600
 		let minutes = Int(time) / 60 % 60
 		let seconds = Int(time) % 60
 		
 		return hours > 0 ? String(format: "%02i:%02i:%02i", hours, minutes, seconds) : String(format: "%02i:%02i", minutes, seconds)
+	}
+	
+	private func ScoreListToString(_ scoreList: ScoreList) -> String {
+		var out : String = "|"
+		let scores = Get(scoreList: scoreList)
+		
+		for score in scores {
+			out += " \(score.ToString()) |"
+		}
+		
+		return out
 	}
 	
 }

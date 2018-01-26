@@ -30,6 +30,8 @@ class Menu {
 	static var xPosition : CGFloat = 0 // For viewDidLoadSubViews events
 	static var margins : CGFloat = 10
 	
+	// -- Properties
+	
 	var options : [MenuObject] {
 		get { return m_options }
 		set(value) { m_options = value }
@@ -39,6 +41,8 @@ class Menu {
 		get { return m_parent }
 		set(value) { m_parent = value }
 	}
+	
+	// -- Functions
 	
 	init(_ breadcrump: String, backButton: String?, backButtonType: MenuOption.OptionType?, view: UIView) {
 		m_breadcrump = Breadcrump(breadcrump, view: view)
@@ -114,7 +118,6 @@ class Menu {
 	
 	func SwitchTo(menu: Menu, isLowerMenu: Bool) {
 		let animateBackButton = (parent == nil || menu.parent == nil)
-		print( animateBackButton )
 		
 		Close(keepBreadcrump: isLowerMenu, animateBackButton: animateBackButton)
 		menu.Open(skipAnimation: false, animateBackButton: animateBackButton)
@@ -164,6 +167,7 @@ class Menu {
 		}
 	}
 	
+	/// Determined by the last option
 	func IsOpen() -> Bool {
 		return !m_options.last!.IsHidden()
 	}

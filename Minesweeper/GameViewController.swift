@@ -134,7 +134,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	func StartTimers() {
 		m_timerPaused = false
 		
-		if m_timer == nil {
+		if m_timer == nil { // Double check?
 			m_timer = Timer.scheduledTimer(timeInterval: 1, target: self,  selector: (#selector(GameViewController.UpdateTimeLabel)), userInfo: nil, repeats: true)
 		}
 	}
@@ -217,8 +217,8 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	
 	func PlayerWins() {
 		StopTimers()
-		_ = Statistics.sharedInstance.GameFinished(secondsPlayed: m_seconds, endTo: .Won, mapSize: m_mapType) // To do: ask name
 		m_playerWon = true
+		PresentNewHighScoreVC( Statistics.sharedInstance.GameFinished(secondsPlayed: m_seconds, endTo: .Won, mapSize: m_mapType) )
 	}
 	
 	func GetGameState() -> (playing: Bool, won: Bool, secondsPlayed: Int) {
@@ -252,7 +252,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 		m_selectedBlockUI?.Hide()
 	}
 	
-	// Fading notification
+	// Fading notification (Needs killing)
 	
 	func ShowFadingNotification(_ message : String, color: UIColor, size: CGFloat, endScale: CGFloat?, start: Pos, end: Pos?, duration: Double, easeInDuration: Double, delay: Double = 0, toScrollView: Bool = true) {
 		let label = UILabel()
@@ -298,10 +298,9 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		let pos = GetScrollPos() + Pos(view.bounds.size) * 0.5
+		ScrollTo(x: pos.x + view.bounds.size.width * 0.5, y: pos.y, animated: true, adhereToLimits: false)
 		
 		if let target = segue.destination as? MainMenuViewController { // if segue.identifier == "gameToMenu" {
-			ScrollTo(x: pos.x + view.bounds.size.width * 0.5, y: pos.y, animated: true, adhereToLimits: false)
-			
 			target.m_gameViewController = self
 			m_timerPaused = true
 		}
@@ -314,6 +313,17 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 
 		ScrollTo(x: pos.x - view.bounds.size.width * 0.5, y: pos.y, animated: true, adhereToLimits: false)
 		m_timerPaused = false
+	}
+	
+	private func PresentNewHighScoreVC(_ position: Int) {
+		if position > -1 {
+			let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+			
+			if let newHighScore = storyBoard.instantiateViewController(withIdentifier: "newHighScore") as? NewHighScoreViewController {
+				newHighScore.Setup(seconds: m_seconds, position: position, mapType: m_mapType)
+				performSegue(withIdentifier: "gameToNewHighScore", sender: self)
+			}
+		}
 	}
 	
 	// Others:
