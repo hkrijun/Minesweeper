@@ -2,7 +2,7 @@
 Basic Minesweeper clone created for an iOS course as a training project.
 
 ## Built With
-* Xcode version ~~8/~~9
+* Xcode version ~~8~~ /9
 * Swift 3
 
 ## Status
