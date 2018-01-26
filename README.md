@@ -14,12 +14,12 @@ Basic Minesweeper clone created for an iOS course as a training project.
 * Menu system
   - Dynamic and animated
   - Mostly programmatically generated
+* High scores and statistics
   
 ### To Do
 - Scale to screen size
 - Proper Game Over event
-  - Player name input in case a high score is reached
-- Gather and save statistics and create a high score list
+  - Player name input in case a high score is reached (in progress)
 - Connect menu actions
 - Enhancements here and there
   
