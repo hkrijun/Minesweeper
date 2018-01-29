@@ -218,7 +218,10 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	func PlayerWins() {
 		StopTimers()
 		m_playerWon = true
-		PresentNewHighScoreVC( Statistics.sharedInstance.GameFinished(secondsPlayed: m_seconds, endTo: .Won, mapSize: m_mapType) )
+		
+		if Statistics.sharedInstance.GameFinished(secondsPlayed: m_seconds, endTo: .Won, mapSize: m_mapType) > -1 {
+			performSegue(withIdentifier: "gameToNewHighScore", sender: self)
+		}
 	}
 	
 	func GetGameState() -> (playing: Bool, won: Bool, secondsPlayed: Int) {
@@ -303,6 +306,8 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 		if let target = segue.destination as? MainMenuViewController { // if segue.identifier == "gameToMenu" {
 			target.m_gameViewController = self
 			m_timerPaused = true
+		} else if let target = segue.destination as? NewHighScoreViewController {
+			target.Setup(seconds: m_seconds, position: Statistics.sharedInstance.GetLastScorePosition(), mapType: m_mapType)
 		}
 	}
 	
@@ -313,17 +318,6 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 
 		ScrollTo(x: pos.x - view.bounds.size.width * 0.5, y: pos.y, animated: true, adhereToLimits: false)
 		m_timerPaused = false
-	}
-	
-	private func PresentNewHighScoreVC(_ position: Int) {
-		if position > -1 {
-			let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-			
-			if let newHighScore = storyBoard.instantiateViewController(withIdentifier: "newHighScore") as? NewHighScoreViewController {
-				newHighScore.Setup(seconds: m_seconds, position: position, mapType: m_mapType)
-				performSegue(withIdentifier: "gameToNewHighScore", sender: self)
-			}
-		}
 	}
 	
 	// Others:

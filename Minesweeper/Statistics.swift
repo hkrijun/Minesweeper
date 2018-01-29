@@ -24,6 +24,7 @@ class Statistics {
 	private var m_scoreLists = [[Score]]()
 	
 	private let m_settings = UserDefaults.standard
+	private var m_lastScorePosition : Int = -1
 	
 	// -- Data definitions
 	
@@ -166,6 +167,12 @@ class Statistics {
 		get { return Format(secondsToTime: averageGameTimeInSeconds) }
 	}
 	
+	func GetLastScorePosition() -> Int {
+		let out = m_lastScorePosition
+		m_lastScorePosition = -1
+		return out
+	}
+	
 	func GameFinished(secondsPlayed: Int, endTo: EndType, mapSize: ScoreList) -> Int {
 		var positionOnScoreList = -1
 		m_totalSecondsPlayed += secondsPlayed
@@ -181,10 +188,10 @@ class Statistics {
 		}
 		
 		SaveStats()
+		m_lastScorePosition = positionOnScoreList
 		return positionOnScoreList
 	}
-	
-	/// Returns position for new score, -1 in case it's not a high score
+
 	private func ProposeScore(toList _scoreList: ScoreList, seconds: Int) -> Int {
 		let scoreLists = Get(scoreList: _scoreList)
 		
