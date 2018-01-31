@@ -15,10 +15,14 @@ class MainMenuViewController: UIViewController {
 	@IBOutlet weak var logoLabel: PaddedLabel!
 	@IBOutlet weak var statBar: UIView!
 	
-	var m_gameViewController : GameViewController? // Set by creator/parent GameViewController
+	var m_gameViewController : GameViewController? // (MUST BE) Set by creator/parent GameViewController
 
+	// -- Menus
+	
 	private var m_menus : [Menu] = [Menu]()
 	private var m_stats : [MenuStat] = [MenuStat]()
+	
+	// -- Menu identifiers
 	
 	private enum MenuID : Int {
 		case main = 0, newGame, topListChoice, normalTopList, largeTopList // DON'T FORGET COUNT!
@@ -56,7 +60,7 @@ class MainMenuViewController: UIViewController {
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		
-		Menu.xPosition = menuImage.frame.origin.x + menuImage.frame.width + Menu.margins
+		Menu.xPosition = menuImage.frame.origin.x + menuImage.frame.width + Menu.margins // Position of menu items
 		MenuOption.viewWidth = view.bounds.width
 		MenuOption.viewHeight = view.bounds.height
 		
@@ -159,7 +163,7 @@ class MainMenuViewController: UIViewController {
 		let stats : [(title: String, value: String)] = [
 			(title: "AVERAGE GAME LENGTH", value: Statistics.sharedInstance.averageGameTime),
 			(title: "TOTAL TIME PLAYED", value: Statistics.sharedInstance.totalTimePlayed),
-			(title: "GAMES LOST", value: "\(Statistics.sharedInstance.gamesLost)"),
+			(title: "GAMES LOST", value: 37"\(Statistics.sharedInstance.gamesLost)"),
 			(title: "GAMES WON", value: "\(Statistics.sharedInstance.gamesWon)"),
 			(title: "GAMES PLAYED", value: "\(Statistics.sharedInstance.totalGamesPlayed)")
 		]
@@ -205,12 +209,22 @@ class MainMenuViewController: UIViewController {
 				_ = Statistics.sharedInstance.GameFinished(secondsPlayed: gameState.secondsPlayed, endTo: .Restarted, mapSize: .NormalMap)
 			}
 			
-			gameView.StartNewGame()
+			gameView.StartNewGame(mapType: .NormalMap)
 		}
 	}
 	
 	@objc func LargeNewGameClicked() {
-		
+		if let gameView = m_gameViewController {
+			Close(menu: .newGame)
+			
+			let gameState = gameView.GetGameState()
+			
+			if gameState.playing {
+				_ = Statistics.sharedInstance.GameFinished(secondsPlayed: gameState.secondsPlayed, endTo: .Restarted, mapSize: .NormalMap)
+			}
+			
+			gameView.StartNewGame(mapType: .LargeMap)
+		}
 	}
 	
 	@objc func BackFromNewGameClicked() {
@@ -244,7 +258,7 @@ class MainMenuViewController: UIViewController {
 	}
 	
 	@objc func TopListEntryClicked() {
-		
+		// Dummy action
 	}
 	
 	// -- Menu helpers
@@ -269,7 +283,7 @@ class MainMenuViewController: UIViewController {
 		DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: closure)
 	}
 	
-	// -- Others
+	// -- Xcode created
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
