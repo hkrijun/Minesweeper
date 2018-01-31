@@ -163,7 +163,7 @@ class MainMenuViewController: UIViewController {
 		let stats : [(title: String, value: String)] = [
 			(title: "AVERAGE GAME LENGTH", value: Statistics.sharedInstance.averageGameTime),
 			(title: "TOTAL TIME PLAYED", value: Statistics.sharedInstance.totalTimePlayed),
-			(title: "GAMES LOST", value: 37"\(Statistics.sharedInstance.gamesLost)"),
+			(title: "GAMES LOST", value: "\(Statistics.sharedInstance.gamesLost)"),
 			(title: "GAMES WON", value: "\(Statistics.sharedInstance.gamesWon)"),
 			(title: "GAMES PLAYED", value: "\(Statistics.sharedInstance.totalGamesPlayed)")
 		]

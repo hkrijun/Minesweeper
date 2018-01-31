@@ -10,8 +10,13 @@ import Foundation
 import UIKit
 
 class Block {
+	
+	// -- Public variables
+	
  	var m_button : UIButton
 	var m_location : Location
+	
+	// -- Private variables
 	
 	private var m_threatLevel : Int = 0
 	private var m_isBomb : Bool = false
@@ -72,7 +77,7 @@ class Block {
 	}
 	
 	func PlantBomb() {
-		//m_appearance = .Bomb // DEBUG: shows bombs
+		//m_appearance = .Bomb // DEBUG: if enabled shows bombs
 		m_isBomb = true
 	}
 	
@@ -106,13 +111,13 @@ class Block {
 		if m_location.y - 1 >= 0 && solver(m_location.x, m_location.y - 1) {
 			mysteries.append(.top)
 		}
-		if m_location.y + 1 < m_minefield.m_sizeY && solver(m_location.x, m_location.y + 1) {
+		if m_location.y + 1 < m_minefield.sizeY && solver(m_location.x, m_location.y + 1) {
 			mysteries.append(.bottom)
 		}
 		if m_location.x - 1 >= 0 && solver(m_location.x - 1, m_location.y) {
 			mysteries.append(.left)
 		}
-		if m_location.x + 1 < m_minefield.m_sizeX && solver(m_location.x + 1, m_location.y) {
+		if m_location.x + 1 < m_minefield.sizeX && solver(m_location.x + 1, m_location.y) {
 			mysteries.append(.right)
 		}
 

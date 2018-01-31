@@ -16,29 +16,55 @@ protocol MinefieldDelegate {
 }
 
 class Minefield: GameViewControllerDelegate {
+	
+	// -- Consts
+	
+	private let PERLIN_OCTAVES : Int = 14
+	private let PERLIN_PERSISTENCE : Float = 0.9
+	private let PERLIN_ZOOM : Float = 10
+	
+	// -- Public variables
+	
 	var m_minefieldDelegate : MinefieldDelegate?
-	var m_perlin : PerlinGenerator = PerlinGenerator()
-	var m_minePlantingLikeliness : Float = 0.2
 	
-	var m_block : [[Block]] = []
+	// -- Private variables/settings
 	
-	var m_sizeX : Int
-	var m_sizeY : Int
-	var m_tileWidth : Int
-	var m_tileHeight : Int
+	private var m_perlin : PerlinGenerator = PerlinGenerator()
+	private var m_minePlantingLikeliness : Float = 0.2
 	
-	var m_marginTop : Int = 100
-	var m_marginSides : Int = 100
+	private var m_block : [[Block]] = []
+	
+	private var m_sizeX : Int
+	private var m_sizeY : Int
+	private var m_tileWidth : Int
+	private var m_tileHeight : Int
+	
+	private var m_marginTop : Int = 100
+	private var m_marginSides : Int = 100
 	
 	// -- Minefield internal
 	
-	var m_clearBlocks : Int = 0
-	var m_mineCount : Int = 0
+	private var m_clearBlocks : Int = 0
+	private var m_mineCount : Int = 0
 	
-	var m_blocksBeingOpenedCount = 0
-	var m_mysteryBlocksToUpdate = [Location]()
-	var m_openBlockQueue = [Location]()
-	var m_openBlockQueueProcessed : Int = -1
+	private var m_blocksBeingOpenedCount = 0
+	private var m_mysteryBlocksToUpdate = [Location]()
+	private var m_openBlockQueue = [Location]()
+	private var m_openBlockQueueProcessed : Int = -1
+	
+	// -- Public properties
+	
+	var sizeX : Int {
+		get {
+			return m_sizeX
+		}
+	}
+	
+	var sizeY : Int {
+		get {
+			return m_sizeY
+		}
+	}
 	
 	// init(,,,,)
 	// Makes minefield fit inside set width and height
@@ -83,13 +109,13 @@ class Minefield: GameViewControllerDelegate {
 	}
 	
 	// -- Creates minefield
-	
+
 	func Create(_ view: UIView, delegate: MinefieldDelegate? = nil) {
 		if delegate != nil {
 			m_minefieldDelegate = delegate!
 		}
 		
-		SetupPerlin(octaves: 14, persistence: 0.9, zoom: 10)
+		SetupPerlin(octaves: PERLIN_OCTAVES, persistence: PERLIN_PERSISTENCE, zoom: PERLIN_ZOOM)
 		
 		m_clearBlocks = m_sizeX * m_sizeY
 		m_mineCount = 0

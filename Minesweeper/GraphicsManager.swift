@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import UIScreenExtension
 
 class GraphicsManager {
 	
@@ -44,6 +45,14 @@ class GraphicsManager {
 	var screenWidth : Int = 0
 	var screenHeight : Int = 0
 	var screenSize : CGFloat = 0
+	
+	// -- Properties
+	
+	var centimetersToPoints : CGFloat {
+		get {
+			return (UIScreen.pointsPerCentimeter ?? 150)
+		}
+	}
 	
 	/// Initialises graphics
 	
