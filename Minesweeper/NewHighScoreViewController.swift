@@ -47,7 +47,7 @@ class NewHighScoreViewController: UIViewController {
 	private func SetupUI() {
 		score.text = Statistics.sharedInstance.Format(secondsToTime: m_seconds)
 		scorePosition.text = "#\(m_position + 1)"
-		mapType.text = m_mapType.ToString()
+		mapType.text = m_mapType.ToString().uppercased()
 	}
 	
 	@IBAction func continueClicked(sender: AnyObject) {

@@ -33,11 +33,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="aHE-Q1-Jsp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="627"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1X-Lu-plE" customClass="TriangleView" customModule="Minesweeper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="126" height="126"/>
+                                <rect key="frame" x="0.0" y="40" width="126" height="126"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="P1X-Lu-plE" secondAttribute="height" multiplier="1:1" id="AIz-fc-zLt"/>
@@ -173,7 +173,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MINESWEEPER" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmD-6G-33G" customClass="PaddedLabel" customModule="Minesweeper" customModuleProvider="target">
-                                <rect key="frame" x="40" y="90" width="302" height="50"/>
+                                <rect key="frame" x="40" y="90" width="50.000000000000014" height="312"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.055999999999999966" blue="0.18000000000000016" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="50"/>
                                 <color key="textColor" red="0.84999999999999998" green="0.79730000000000001" blue="0.58649999999999991" alpha="1" colorSpace="calibratedRGB"/>
@@ -262,7 +262,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ck4-2X-O6W" customClass="PrettyView" customModule="Minesweeper" customModuleProvider="target">
-                                <rect key="frame" x="67" y="161.5" width="240" height="240"/>
+                                <rect key="frame" x="67" y="155.5" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ck4-2X-O6W" secondAttribute="height" multiplier="1:1" id="2tY-jA-mBt"/>
                                     <constraint firstAttribute="width" constant="240" id="Zmh-Ab-3hQ"/>
@@ -275,45 +275,23 @@
                                         <color key="value" red="0.081599999999999992" green="0.10463999999999998" blue="0.12" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="25"/>
+                                        <real key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW HIGH SCORE" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="o38-Kv-3C6">
-                                <rect key="frame" x="20" y="20" width="335" height="54"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="45"/>
-                                <color key="textColor" red="0.22741189236111109" green="0.28588923611111111" blue="0.32487413194444442" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="40" y="20" width="295" height="60"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="50"/>
+                                <color key="textColor" red="0.62" green="0.043399999999999966" blue="0.13950000000000012" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T28-H1-4Fc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYV-e0-zRW" customClass="PaddedLabel" customModule="Minesweeper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="83.5" width="94" height="48"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.055999999999999966" blue="0.18000000000000016" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
-                                <color key="textColor" red="0.84999999999999998" green="0.79730000000000001" blue="0.58649999999999991" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="southbound" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NORMAL" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlE-9A-Okg" customClass="PaddedLabel" customModule="Minesweeper" customModuleProvider="target">
-                                <rect key="frame" x="94" y="83.5" width="281" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NORMAL" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlE-9A-Okg" customClass="PaddedLabel" customModule="Minesweeper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="73" width="225" height="52"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.056000000000000001" blue="0.17999999999999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="35"/>
                                 <color key="textColor" red="0.84999999999999998" green="0.79730000000000001" blue="0.58650000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -325,15 +303,37 @@
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="40"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYV-e0-zRW" customClass="PaddedLabel" customModule="Minesweeper" customModuleProvider="target">
+                                <rect key="frame" x="225" y="73.5" width="150" height="52"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.055999999999999966" blue="0.18000000000000016" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="35"/>
+                                <color key="textColor" red="0.84999999999999998" green="0.79730000000000001" blue="0.58649999999999991" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="southbound" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                        <real key="value" value="40"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13:55" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cQW-ir-Uq1">
-                                <rect key="frame" x="67" y="161.5" width="240" height="240"/>
+                                <rect key="frame" x="67" y="155.5" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cQW-ir-Uq1" secondAttribute="height" multiplier="1:1" id="CU1-Mu-qxJ"/>
                                     <constraint firstAttribute="width" constant="240" id="FP3-Vc-jQ7"/>
@@ -343,7 +343,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asd" borderStyle="line" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jwy-RK-adF">
-                                <rect key="frame" x="20" y="431.5" width="190" height="50"/>
+                                <rect key="frame" x="20" y="425.5" width="190" height="50"/>
                                 <color key="backgroundColor" red="0.0385" green="0.046166666670000002" blue="0.050000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.80959999999999999" green="0.92000000000000004" blue="0.82064000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="45"/>
@@ -353,7 +353,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Y6o-Fu-le2">
-                                <rect key="frame" x="210" y="431.5" width="145" height="50"/>
+                                <rect key="frame" x="210" y="425.5" width="145" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="145" id="iYE-sM-Ftp"/>
@@ -371,32 +371,32 @@
                         </subviews>
                         <color key="backgroundColor" red="0.10349999999999999" green="0.13294999999999998" blue="0.14999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="PlE-9A-Okg" secondAttribute="trailing" id="1W9-7Z-JG2"/>
                             <constraint firstAttribute="trailing" secondItem="nOM-pk-R6U" secondAttribute="trailing" id="5yq-UR-Sfz"/>
                             <constraint firstAttribute="bottom" secondItem="nOM-pk-R6U" secondAttribute="bottom" id="71A-Dd-iMY"/>
                             <constraint firstItem="T28-H1-4Fc" firstAttribute="centerY" secondItem="HRg-cc-EVY" secondAttribute="centerY" id="7BU-7T-QKp"/>
                             <constraint firstItem="Y6o-Fu-le2" firstAttribute="leading" secondItem="Jwy-RK-adF" secondAttribute="trailing" id="9Vx-Ow-Yc4"/>
-                            <constraint firstItem="o38-Kv-3C6" firstAttribute="leading" secondItem="HRg-cc-EVY" secondAttribute="leading" constant="20" id="BKM-ch-dzw"/>
+                            <constraint firstItem="o38-Kv-3C6" firstAttribute="leading" secondItem="HRg-cc-EVY" secondAttribute="leading" constant="40" id="BKM-ch-dzw"/>
                             <constraint firstItem="Jwy-RK-adF" firstAttribute="leading" secondItem="HRg-cc-EVY" secondAttribute="leading" constant="20" id="Ehu-YZ-UHP"/>
                             <constraint firstItem="Y6o-Fu-le2" firstAttribute="top" secondItem="Ck4-2X-O6W" secondAttribute="bottom" constant="30" id="Fuq-Fc-STI"/>
                             <constraint firstItem="nOM-pk-R6U" firstAttribute="width" secondItem="HRg-cc-EVY" secondAttribute="width" multiplier="0.8" id="HDR-Ji-7az"/>
                             <constraint firstItem="cQW-ir-Uq1" firstAttribute="centerX" secondItem="Ck4-2X-O6W" secondAttribute="centerX" id="IXc-ez-9N5"/>
                             <constraint firstItem="Ck4-2X-O6W" firstAttribute="top" secondItem="XYV-e0-zRW" secondAttribute="bottom" constant="30" id="Ih3-iJ-kEa"/>
-                            <constraint firstItem="XYV-e0-zRW" firstAttribute="top" secondItem="o38-Kv-3C6" secondAttribute="baseline" constant="20" id="Let-6s-AwB"/>
+                            <constraint firstItem="XYV-e0-zRW" firstAttribute="top" secondItem="o38-Kv-3C6" secondAttribute="baseline" constant="5" id="Let-6s-AwB"/>
                             <constraint firstItem="T28-H1-4Fc" firstAttribute="width" secondItem="HRg-cc-EVY" secondAttribute="width" id="R9x-0g-c5f"/>
                             <constraint firstItem="Y6o-Fu-le2" firstAttribute="trailing" secondItem="HRg-cc-EVY" secondAttribute="trailing" constant="-20" id="S8k-wd-BI0"/>
                             <constraint firstItem="T28-H1-4Fc" firstAttribute="height" secondItem="HRg-cc-EVY" secondAttribute="height" id="TsU-M5-p65"/>
                             <constraint firstItem="T28-H1-4Fc" firstAttribute="centerX" secondItem="HRg-cc-EVY" secondAttribute="centerX" id="UcD-Kv-Tgw"/>
                             <constraint firstItem="cQW-ir-Uq1" firstAttribute="centerY" secondItem="Ck4-2X-O6W" secondAttribute="centerY" id="XO5-g6-cHX"/>
-                            <constraint firstItem="XYV-e0-zRW" firstAttribute="width" secondItem="HRg-cc-EVY" secondAttribute="width" multiplier="0.25" id="diP-v2-1IJ"/>
+                            <constraint firstItem="XYV-e0-zRW" firstAttribute="width" secondItem="HRg-cc-EVY" secondAttribute="width" multiplier="0.4" id="diP-v2-1IJ"/>
                             <constraint firstItem="Jwy-RK-adF" firstAttribute="top" secondItem="Ck4-2X-O6W" secondAttribute="bottom" constant="30" id="e9c-Hr-Mud"/>
                             <constraint firstItem="o38-Kv-3C6" firstAttribute="top" secondItem="HRg-cc-EVY" secondAttribute="top" constant="20" id="gb6-cJ-WP8"/>
-                            <constraint firstItem="XYV-e0-zRW" firstAttribute="leading" secondItem="HRg-cc-EVY" secondAttribute="leading" id="oV0-QQ-8KB"/>
-                            <constraint firstAttribute="trailing" secondItem="o38-Kv-3C6" secondAttribute="trailing" constant="20" id="rvQ-qD-Sni"/>
-                            <constraint firstItem="PlE-9A-Okg" firstAttribute="top" secondItem="o38-Kv-3C6" secondAttribute="baseline" constant="20" id="tqR-p9-44q"/>
+                            <constraint firstItem="XYV-e0-zRW" firstAttribute="leading" secondItem="PlE-9A-Okg" secondAttribute="trailing" id="mwS-aP-hML"/>
+                            <constraint firstAttribute="trailing" secondItem="o38-Kv-3C6" secondAttribute="trailing" constant="40" id="rvQ-qD-Sni"/>
+                            <constraint firstItem="PlE-9A-Okg" firstAttribute="top" secondItem="o38-Kv-3C6" secondAttribute="baseline" constant="5" id="tqR-p9-44q"/>
                             <constraint firstItem="Jwy-RK-adF" firstAttribute="height" secondItem="Y6o-Fu-le2" secondAttribute="height" id="v9V-MX-ezd"/>
+                            <constraint firstItem="PlE-9A-Okg" firstAttribute="leading" secondItem="HRg-cc-EVY" secondAttribute="leading" id="vXo-Pe-O2g"/>
                             <constraint firstItem="Ck4-2X-O6W" firstAttribute="centerX" secondItem="HRg-cc-EVY" secondAttribute="centerX" id="wFL-X5-546"/>
-                            <constraint firstItem="PlE-9A-Okg" firstAttribute="leading" secondItem="XYV-e0-zRW" secondAttribute="trailing" id="xEU-Ax-YJX"/>
+                            <constraint firstAttribute="trailing" secondItem="XYV-e0-zRW" secondAttribute="trailing" id="xEU-Ax-YJX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -410,7 +410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbe-iD-INA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1673" y="423"/>
+            <point key="canvasLocation" x="1672.8" y="422.33883058470769"/>
         </scene>
     </scenes>
 </document>

@@ -32,7 +32,7 @@ class HighlightGraphic : GameGraphic {
 		
 		// -- Colours
 		
-		let backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+		let backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
 		let highlightColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
 		
 		// -- Vars
