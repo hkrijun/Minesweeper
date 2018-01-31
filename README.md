@@ -17,9 +17,9 @@ Basic Minesweeper clone created for an iOS course as a training project.
 * High scores and statistics
   
 ### To Do
-- Scale to screen size
+- Scale to screen size (testing)
 - Proper Game Over event
-- Connect missing menu actions
+- New game transition
 - Enhancements here and there
   
 > Expected to be completed in February 2018.
