@@ -15,6 +15,9 @@ protocol SelectedBlockUIDelegate {
 }
 
 class SelectedBlockUI {
+	
+	// -- Button identifiers
+	
 	private enum Btn {
 		static let Open : Int = 0
 		static let Flag : Int = 1
@@ -23,13 +26,15 @@ class SelectedBlockUI {
 		static let RemoveFlag : Int = 1
 	}
 
+	// -- Private variables
+	
 	private var m_buttons : [Button] = [Button]()
 	private var m_flagGraphics : [UIImage] = [UIImage]()
 	
 	private var m_selectedBlockIndicator : UIImageView
 	private var m_highlight : UIButton
 	private var m_animateHighlight : Bool = false
-	private var m_disableHightlight : Bool = true
+	private var m_disableHightlight : Bool = true // Currently not used due to poor performance of animating alpha channel
 
 	private var m_view : UIView
 
@@ -43,10 +48,12 @@ class SelectedBlockUI {
 		m_tileWidth = CGFloat(GraphicsManager.sharedInstance.tileSize)
 		m_uiButtonSize = CGFloat(GraphicsManager.sharedInstance.uiButtonSize)
 		
+		// -- Set flag button graphics
+		
 		m_flagGraphics.append(GraphicsManager.sharedInstance.uiAddFlagGraphic!)
 		m_flagGraphics.append(GraphicsManager.sharedInstance.uiRemoveFlagGraphic!)
 		
-		// -- Selected block indicator
+		// -- Create selected block indicator
 		
 		m_selectedBlockIndicator = UIImageView(frame: CGRect(x: 0, y: 0, width: GraphicsManager.sharedInstance.tileSize, height: GraphicsManager.sharedInstance.tileSize))
 		m_selectedBlockIndicator.image = GraphicsManager.sharedInstance.selectedBlockGraphic!
@@ -55,11 +62,7 @@ class SelectedBlockUI {
 		
 		// -- Highlight
 		
-		m_highlight = UIButton(frame: CGRect(x: 0, y: 0, width: HighlightGraphic.intendedWidth, height: HighlightGraphic.intendedHeight)) /*
-		                                   width: GraphicsManager.sharedInstance.highlightGraphic!.size.width * (1 / HighlightGraphic.quality),
-		                                   height: GraphicsManager.sharedInstance.highlightGraphic!.size.height * (1 / HighlightGraphic.quality)))
-*/
-		print("init: \(m_highlight.frame.width) x \(m_highlight.frame.height)")
+		m_highlight = UIButton(frame: CGRect(x: 0, y: 0, width: HighlightGraphic.intendedWidth, height: HighlightGraphic.intendedHeight))
 		m_highlight.setBackgroundImage(GraphicsManager.sharedInstance.highlightGraphic, for: .normal)
 		m_highlight.isUserInteractionEnabled = false
 
