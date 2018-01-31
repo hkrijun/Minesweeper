@@ -14,6 +14,12 @@ protocol GameViewControllerDelegate {
 
 class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDelegate {
 	
+	// -- Consts
+	
+	private let BLOCK_SIZE_IN_CM : CGFloat = 1.1
+	private let BLOCKS_NORMAL_MAP : Int = 25
+	private let BLOCKS_LARGE_MAP : Int = 35
+	
 	// -- Storyboard variables
 	
 	@IBOutlet weak var scrollView: UIScrollView!
@@ -49,18 +55,20 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	private var m_lastSeletedBlockPosition = Pos(0, 0)
 	
 	private var m_lastScrollToTargetPos : Pos = Pos()
-	
-	// -- Functions
-	
+
+	// -- Public variables
+
 	override var prefersStatusBarHidden: Bool {
 		return true
 	}
 	
+	// -- Init
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let boardSize = CGSize(width: 1500, height: 1500) // view.bounds.size
-		let mineSize : Int = 50
+		let mineSize : Int = Int(BLOCK_SIZE_IN_CM * GraphicsManager.sharedInstance.centimetersToPoints)
+		let boardSize = CGSize(width: BLOCKS_NORMAL_MAP * mineSize, height: BLOCKS_NORMAL_MAP * mineSize) // view.bounds.size
 		
 		scrollView.contentSize = boardSize
 		scrollView.canCancelContentTouches = false
@@ -84,9 +92,9 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 	
 	func StartNewGame(mapType: Statistics.ScoreList = .NormalMap) {
 		m_mapType = mapType
-		let mapSize = mapType == .NormalMap ? 30 : 60
+		let mapSize = mapType == .NormalMap ? BLOCKS_NORMAL_MAP : BLOCKS_LARGE_MAP
 		
-		let blockSize : Int = 50 // TODO: calculate from res+dpi https://github.com/marchv/UIScreenExtension
+		let blockSize : Int = Int(BLOCK_SIZE_IN_CM * GraphicsManager.sharedInstance.centimetersToPoints)
 		let boardSize = CGSize(width: mapSize * blockSize, height: mapSize * blockSize)
 
 		m_lastScrollToTargetPos = Pos(0)
