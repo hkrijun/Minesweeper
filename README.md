@@ -1,8 +1,10 @@
 # Minesweeper
 Basic Minesweeper clone created for an iOS course as a training project.
 
+![alt text](minesweeper_github.png "Minesweeper Screenshot")
+
 ## Built With
-* Xcode version ~~8~~ /9
+* Xcode version ~~8~~ / 9
 * Swift 3
 
 ## Status
@@ -19,7 +21,7 @@ Basic Minesweeper clone created for an iOS course as a training project.
 ### To Do
 - Scale to screen size (testing)
 - Proper Game Over event
-- New game transition
-- Enhancements here and there
+- Smooth transition for New Game event
+- Enhancements here and there, mostly code
   
 > Expected to be completed in February 2018.
