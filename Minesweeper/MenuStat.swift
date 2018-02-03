@@ -68,11 +68,17 @@ class MenuStat : MenuObject {
 			m_label[VALUE].backgroundColor = UIColor(hue: 200/360, saturation: 0.24, brightness: 0.13, alpha: 1)
 			m_label[VALUE].textColor = UIColor(hue: 213/360, saturation: 0.32, brightness: 0.32, alpha: 1)
 		case .Scores:
-			m_label[TITLE].backgroundColor = UIColor(hue: 350/360, saturation: 0.26, brightness: 0.16, alpha: 1)
+			/*m_label[TITLE].backgroundColor = UIColor(hue: 350/360, saturation: 0.26, brightness: 0.16, alpha: 1)
 			m_label[TITLE].textColor = UIColor(hue: 348/360, saturation: 0.25, brightness: 0.28, alpha: 1)
 			
 			m_label[VALUE].backgroundColor = UIColor(hue: 350/360, saturation: 0.23, brightness: 0.27, alpha: 1)
-			m_label[VALUE].textColor = UIColor(hue: 56/360, saturation: 0.22, brightness: 0.54, alpha: 1)
+			m_label[VALUE].textColor = UIColor(hue: 56/360, saturation: 0.22, brightness: 0.54, alpha: 1)*/
+			m_label[TITLE].backgroundColor = UIColor(hue: 216/360, saturation: 0.12, brightness: 0.92, alpha: 1)
+			m_label[TITLE].textColor = UIColor(hue: 212/360, saturation: 0.73, brightness: 0.78, alpha: 1)
+			
+			m_label[VALUE].backgroundColor = UIColor(hue: 212/360, saturation: 0.73, brightness: 0.78, alpha: 1)
+			m_label[VALUE].textColor = UIColor(hue: 216/360, saturation: 0.12, brightness: 0.92, alpha: 1)
+			
 		}
 	}
 	
