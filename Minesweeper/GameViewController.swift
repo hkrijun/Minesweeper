@@ -103,6 +103,7 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 		
 		m_minefield!.SetParameters(width: mapSize * blockSize, height: mapSize * blockSize, blockSize: blockSize)
 		m_minefield!.Create(scrollView)
+		ScrollTo(x: 0, y: 0)
 		
 		StopTimers()
 		m_seconds = -1
@@ -208,6 +209,10 @@ class GameViewController: UIViewController, MinefieldDelegate, SelectedBlockUIDe
 		if clearBlocks == 0 {
 			PlayerWins()
 		}
+	}
+	
+	func MinefieldCreated() {
+		//ScrollTo(x: 0, y: 0, animated: true, adhereToLimits: true)
 	}
 	
 	// Game over
