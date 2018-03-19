@@ -17,7 +17,7 @@ extension UIViewController {
 	// From -> https://stackoverflow.com/questions/38741556/ios-how-to-simple-return-back-to-previous-presented-pushed-view-controller-progr
 	// And -> https://stackoverflow.com/questions/38799143/dismiss-view-controller-with-custom-animation
 	
-	func performSegueToReturnBack(_ transitionSubType: String)  {
+	func performSegueToReturnBack(_ transitionSubType: String, noChildDismissedEvent: Bool = false)  {
 		if let nav = self.navigationController {
 			nav.popViewController(animated: true)
 		} else {
@@ -32,8 +32,10 @@ extension UIViewController {
 
 			self.dismiss(animated: false, completion: nil)
 			
-			if let parent = self.presentingViewController {
-				parent.childDismissed()
+			if !noChildDismissedEvent {
+				if let parent = self.presentingViewController {
+					parent.childDismissed()
+				}
 			}
 		}
 	}

@@ -201,7 +201,7 @@ class MainMenuViewController: UIViewController {
 	
 	@objc func NormalNewGameClicked() {
 		if let gameView = m_gameViewController {
-			Close(menu: .newGame)
+			Close(menu: .newGame, noChildDismissedEvent: true)
 			
 			let gameState = gameView.GetGameState()
 			
@@ -215,7 +215,7 @@ class MainMenuViewController: UIViewController {
 	
 	@objc func LargeNewGameClicked() {
 		if let gameView = m_gameViewController {
-			Close(menu: .newGame)
+			Close(menu: .newGame, noChildDismissedEvent: true)
 			
 			let gameState = gameView.GetGameState()
 			
@@ -271,11 +271,11 @@ class MainMenuViewController: UIViewController {
 		MenuBy(id: menu).parent = MenuBy(id: parent)
 	}
 	
-	private func Close(menu: MenuID) {
+	private func Close(menu: MenuID, noChildDismissedEvent: Bool = false) {
 		MenuBy(id: menu).Close(keepBreadcrump: false, durationMultiplier: 0.25, delayMultiplier: 0.25)
 		
 		Delay(0.1) {
-			self.performSegueToReturnBack(kCATransitionFromLeft)
+			self.performSegueToReturnBack(kCATransitionFromLeft, noChildDismissedEvent: noChildDismissedEvent)
 		}
 	}
 	
