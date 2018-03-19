@@ -12,6 +12,7 @@ import UIKit
 protocol MinefieldDelegate {
 	func BlockClicked(_ block: Block)
 	func RemainingBlockCountChanged(clearBlocks: Int, mines: Int)
+	func MinefieldCreated()
 	func HitBomb()
 }
 
@@ -151,6 +152,7 @@ class Minefield: GameViewControllerDelegate {
 		
 		m_clearBlocks -= m_mineCount
 		UpdateBlocks()
+		m_minefieldDelegate?.MinefieldCreated()
 	}
 	
 	// -- Calls minefield blocks to update their appearance
